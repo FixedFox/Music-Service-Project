@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Genres</title>
+</head>
+<body>
+<h1>Genres</h1>
+<ol th:each="genre :${genres}">
+    <li th:text="${genre.getGenreName()}"></li>
+</ol>
+<a href="/musicianpanel">Назад к панели музыканта</a>
+</body>
+</html>
