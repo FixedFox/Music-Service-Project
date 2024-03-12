@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.fixedfox.musicservice.entity.Genre;
 import ru.fixedfox.musicservice.repository.GenreRepository;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Service
@@ -20,5 +21,10 @@ public class GenreService {
 
     public void createNewGenre(Genre genre) {
         genreRepository.save(genre);
+    }
+
+
+    public void deleteById(Integer id) {
+        genreRepository.deleteById(id);
     }
 }

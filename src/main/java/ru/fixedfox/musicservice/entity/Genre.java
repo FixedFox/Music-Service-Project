@@ -1,19 +1,18 @@
 package ru.fixedfox.musicservice.entity;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "genres")
 public class Genre {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE )
-    @Column(name = "genre_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer genreId;
 
     @Column(name = "genre_name")
-    @NotNull
+    @Size(min = 3)
     private String genreName;
 
     public Genre() {

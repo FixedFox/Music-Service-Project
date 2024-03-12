@@ -6,9 +6,20 @@
 </head>
 <body>
 <h1>Genres</h1>
-<ol th:each="genre :${genres}">
-    <li th:text="${genre.getGenreName()}"></li>
+<ol>
+    <li th:each="genre :${genres}">
+        <div>
+            <span th:text="${genre.getGenreName()}"></span>
+            <a th:href="@{'genres/delete/' + ${genre.getGenreId()}}">Del!</a>
+        </div>
+    </li>
 </ol>
+
+
+<form method="POST" action="/musicianpanel/genres/add">
+    <input type="text" name="genreName">
+    <button type="submit">Добавить!</button>
+</form>
 <a href="/musicianpanel">Назад к панели музыканта</a>
 </body>
 </html>
