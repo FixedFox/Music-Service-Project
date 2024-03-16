@@ -15,22 +15,15 @@ public class Creator {
     @Column(name = "creator_name", nullable = false, unique = true)
     private String creatorName;
 
-    @OneToOne(mappedBy = "creator", orphanRemoval = true)
-    private User user;
-
     @ManyToMany
     @JoinTable(name = "creators_tracks",
             joinColumns = @JoinColumn(name = "creator_id"),
-            inverseJoinColumns = @JoinColumn(name = "tracks_id"))
+            inverseJoinColumns = @JoinColumn(name = "track_id"))
     private Set<Track> tracks = new LinkedHashSet<>();
 
-    public Set<Track> getTracks() {
-        return tracks;
-    }
-
-    public void setTracks(Set<Track> tracks) {
-        this.tracks = tracks;
-    }
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public User getUser() {
         return user;
@@ -38,6 +31,14 @@ public class Creator {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Track> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(Set<Track> tracks) {
+        this.tracks = tracks;
     }
 
     public Creator() {

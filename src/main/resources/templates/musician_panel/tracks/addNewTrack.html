@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить новую комопзицию</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>Добавление новой композиции в сервис</h1>
+    <form method="POST" action="addNewTrack">
+        <input type="text" name="track_name" placeholder="Название композиции"><br>
+        <input type="text" name="count_of_play" placeholder="Количество прослушиваний"><br>
+        <select name="genre">
+            <option th:each="genre :${genres}" th:value="${genre.getGenreName()}">[[${genre.getGenreName()}]]</option>
+        </select><br>
+        <button type="submit">Добавить песню!</button>
+    </form>
+</div>
+</body>
+</html>

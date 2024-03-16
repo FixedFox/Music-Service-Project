@@ -2,10 +2,10 @@ package ru.fixedfox.musicservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableWebMvc
+@EnableJpaRepositories(basePackages = "ru.fixedfox.musicservice.repository")
 public class Application {
 
     public static void main(String[] args) {

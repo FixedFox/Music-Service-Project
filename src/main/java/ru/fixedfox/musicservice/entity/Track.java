@@ -22,18 +22,14 @@ public class Track {
     @NotNull
     private Long countOfPlays;
 
-    @Column(name = "is_adult_content")
-    @NotNull
-    private Boolean isAdultContent;
-
     @ManyToOne
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
     @ManyToMany
-    @JoinTable(name = "tracks_creators",
+    @JoinTable(name = "creators_tracks",
             joinColumns = @JoinColumn(name = "track_id"),
-            inverseJoinColumns = @JoinColumn(name = "creators_id"))
+            inverseJoinColumns = @JoinColumn(name = "creator_id"))
     private Set<Creator> creators = new LinkedHashSet<>();
 
     public Set<Creator> getCreators() {
@@ -51,7 +47,6 @@ public class Track {
         this.trackId = trackId;
         this.trackName = trackName;
         this.countOfPlays = countOfPlays;
-        this.isAdultContent = isAdultContent;
         this.genre = genre;
     }
 
@@ -79,13 +74,6 @@ public class Track {
         this.countOfPlays = countOfPlays;
     }
 
-    public Boolean getAdultContent() {
-        return isAdultContent;
-    }
-
-    public void setAdultContent(Boolean adultContent) {
-        isAdultContent = adultContent;
-    }
 
     public Genre getGenre() {
         return genre;

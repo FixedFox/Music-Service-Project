@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tracklist name</title>
+</head>
+<body>
+<div class="container">
+        <span th:text="${tracklist.getName()}"></span>
+        <span th:text="${tracklist.getTracklistType().getTracklistTypeName()}"></span>
+        <span th:text="${tracklist.getGenre().getGenreName()}"></span>
+</div>
+</body>
+</html>

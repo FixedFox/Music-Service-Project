@@ -19,6 +19,10 @@ public class GenreService {
         return  genreRepository.findAll();
     }
 
+    public Genre getGenreByName(String genreName) {
+        return genreRepository.findByGenreName(genreName);
+    }
+
     public void createNewGenre(Genre genre) {
         genreRepository.save(genre);
     }

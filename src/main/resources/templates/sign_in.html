@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница входа</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>Страница входа</h1>
+    <form method="POST" action="/sign_in">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <button type="submit">Войти</button>
+    </form>
+    <a href="/sign_up">Ещё не зарегистрированы?</a>
+</div>
+</body>
+</html>

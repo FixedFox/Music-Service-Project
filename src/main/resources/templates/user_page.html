@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница пользователя [[${user.getName()}]]</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>Привет, [[${user.getName()}]]</h1>
+    <div class="creatoritem" th:each="creator :${user.getCreators()}"> [[${creator.getCreatorName()}]]</div>
+    <form method="POST" action="user_page/become_creator">
+        <input name="creatorName" placeholder="Добавить исполнителя">
+        <button type="submit">Добавить исполнителя!</button>
+    </form>
+</div>
+</body>
+</html>

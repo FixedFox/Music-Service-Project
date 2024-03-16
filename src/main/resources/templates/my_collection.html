@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My collection</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>My collection</h1>
+    <h2 th:text="${user.getName()}"></h2>
+
+    <a href="my_collection/tracks">Tracks</a>
+    <a href="my_collection/albums">Albums</a>
+    <a href="my_collection/genres">Genres</a>
+    <a href="my_collection/creators">Creators</a>
+    <a href="mainpage">На главную</a>
+</div>
+</body>
+</html>

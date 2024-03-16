@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system;
+}
+body {
+    background-image: linear-gradient(-45deg, #35C3F3 0%, #8b9fe8 20%, #e681d8 39%, #ffa9a4 76%, #FED2CE 100%);
+    width: auto;
+    height: auto;
+}
+
+.container {
+    display: block;
+    max-width: 1170px;
+    width: 100%;
+    height: 80vh;
+    margin: 10vh auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 20px;
+    background-color: #ffffff7d;
+    background-blend-mode: overlay;
+    backdrop-filter: blur(33px);
+    -webkit-backdrop-filter: blur(33px);
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    background-color: #007AFF;
+    padding: 14px 20px;
+    height: 50px;
+    border-radius: 12px;
+    color: white;
+    margin: 8px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 20pt;
+}
+
+.genreitem {
+    display: block;
+    background-color: white;
+    height: 60px;
+    width: 320px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+}
+.trackitem {
+    display: block;
+    background-color: white;
+    height: 60px;
+    width: 320px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+}
+.tracklistitem {
+    display: block;
+    background-color: white;
+    height: 60px;
+    width: 320px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+}
+.creatoritem {
+    display: block;
+    background-color: white;
+    height: 60px;
+    width: 320px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+}

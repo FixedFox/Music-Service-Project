@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Albums</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
+</head>
+<body>
+<div class="container">
+  <h1>Albums</h1>
+  <a href="/musician_panel/tracklists/addNewTracklist">Добавить новую коллекцию композиций</a>
+  <a href="/musician_panel">Назад к панели музыканта</a>
+  <div class="tracklistitem" th:each="tracklist :${tracklists}">
+    <span th:text="${tracklist.getName()}"></span>
+    <span th:text="${tracklist.getTracklistType().getTracklistTypeName()}"></span>
+    <span th:text="${tracklist.getGenre().getGenreName()}"></span>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>Страница регистрации</h1>
+    <form method="POST" action="/sign_up">
+        <input type="text" name="username" placeholder="Имя пользователя">
+        <input type="password" name="password" placeholder="Пароль">
+        <input type="text" name="name" value="<empty>" placeholder="Ник">
+        <button type="submit">Зарегистрироваться!</button>
+    </form>
+    <a href="/sign_in">Уже зарегистрированы?</a>
+</div>
+</body>
+</html>

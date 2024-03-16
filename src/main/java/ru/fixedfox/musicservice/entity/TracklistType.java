@@ -29,4 +29,11 @@ public class TracklistType {
         this.id = id;
     }
 
+    public String getTracklistTypeName() {
+        return tracklistTypeName;
+    }
+
+    public void setTracklistTypeName(String tracklistTypeName) {
+        this.tracklistTypeName = tracklistTypeName;
+    }
 }

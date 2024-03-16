@@ -9,13 +9,13 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "tracklists")
 public class Tracklist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Id
     @ManyToOne(optional = false)
     @JoinColumn(name = "tracklist_type_id", nullable = false)
     private TracklistType tracklistType;

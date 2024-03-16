@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
 </head>
 <body>
-<h1>Hello</h1>
-<a href="/loginpage">LoginPage</a>
+<div class="container">
+    <h1>Добро пожаловать!</h1><br>
+        <a href="/sign_in">Войти</a>
+        <a href="/sign_up">Зарегистрироваться</a>
+</div>
 </body>
 </html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${creator.getCreatorName()}]] page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>Hello [[${creator.getCreatorName()}]]</h1>
+    <a href="/musician_panel">Назад к панели музыканта</a>
+</div>
+</body>
+</html>

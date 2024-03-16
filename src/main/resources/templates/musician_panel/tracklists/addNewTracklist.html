@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Новая коллекция композиций</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>Создать новую коллекцию композиций</h1>
+    <form method="POST" action="addNewTracklist">
+        <input type="text" name="name"><br>
+        <select name="tracklist_type">
+            <option th:each="tracklist_type :${tracklist_types}" th:value="${tracklist_type.getTracklistTypeName()}">[[${tracklist_type.getTracklistTypeName()}]]</option>
+        </select><br>
+        <select name="genre">
+            <option th:each="genre :${genres}" th:value="${genre.getGenreName()}">[[${genre.getGenreName()}]]</option>
+        </select><br>
+        <button type="submit">Добавить!</button>
+    </form>
+</div>
+</body>
+</html>
