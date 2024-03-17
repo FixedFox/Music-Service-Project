@@ -38,7 +38,10 @@ a {
 
 h1 {
     text-align: center;
-    font-size: 20pt;
+    font-size: 24pt;
+}
+h3 {
+    text-align: left;
 }
 
 .genreitem {
@@ -75,7 +78,9 @@ h1 {
 
 }
 .creatoritem {
-    display: block;
+    display: flex;
+    align-items: center;
+    text-align: left;
     background-color: white;
     height: 60px;
     width: 320px;
@@ -83,5 +88,40 @@ h1 {
     padding: 10px;
     margin-bottom: 10px;
     margin-top: 10px;
-
+}
+.creatoritemtext {
+    margin-left: 10px;
+    font-size: 12pt;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.creatoritemtext:hover {
+    color: gray;
+}
+.creatoritemtext:active {
+    color: #FF2D55;
+}
+.editonefield {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    background-color: white;
+    height: 44px;
+    font-size: 17px;
+    width: 345px;
+    border-radius: 10px;
+    padding: 10px;
+}
+.edittwofield {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    background-color: white;
+    height: 68px;
+    font-size: 17px;
+    width: 345px;
+    border-radius: 10px;
+    padding: 10px;
 }

@@ -8,15 +8,16 @@
 <body>
 <div class="container">
     <h1>Hello [[${user.getName()}]]</h1>
+    <a style="background-color: #FF2D55" href="/logout"><img src="imgs/exit.svg"></a>
     <a href="/user_page">Страница пользователя</a><br>
     <a href="/my_collection">MyCollection</a>
-    <a href="/recomendation">Рекомендации</a>
+    <a href="/recommendation">Рекомендации</a>
     <a href="/search">Search</a>
     <a href="/whatsnew">What's new</a>
     <a href="/musician_panel"
-        th:if="${user.isAuthorityName('MUSICIAN')}">Musician panel</a>
+        th:if="${user.isAuthority('MUSICIAN')}">Musician panel</a>
     <a href="/admin_panel/users"
-        th:if="${user.isAuthorityName('ADMIN')}">Admin panel</a>
+        th:if="${user.isAuthority('ADMIN')}">Admin panel</a>
 </div>
 </body>
 </html>

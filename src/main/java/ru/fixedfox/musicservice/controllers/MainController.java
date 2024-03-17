@@ -1,10 +1,14 @@
 package ru.fixedfox.musicservice.controllers;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.fixedfox.musicservice.dto.EditNameOfUserDto;
+import ru.fixedfox.musicservice.dto.EditPasswordDto;
 import ru.fixedfox.musicservice.dto.NewCreatorDto;
 import ru.fixedfox.musicservice.dto.NewUserRegistrationDto;
 import ru.fixedfox.musicservice.entity.User;
@@ -13,15 +17,12 @@ import ru.fixedfox.musicservice.services.UserDetailsServiceImpl;
 
 @Controller
 public class MainController {
-
     private final CreatorService creatorService;
     private final UserDetailsServiceImpl userDetailsServiceImpl;
-    private final PasswordEncoder passwordEncoder;
 
-    public MainController(CreatorService creatorService, UserDetailsServiceImpl userDetailsServiceImpl, PasswordEncoder passwordEncoder) {
+    public MainController(CreatorService creatorService, UserDetailsServiceImpl userDetailsServiceImpl) {
         this.creatorService = creatorService;
         this.userDetailsServiceImpl = userDetailsServiceImpl;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -29,51 +30,11 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/sign_in")
-    public String getLoginPage() {
-        return "sign_in";
-    }
-
-    @GetMapping("/sign_up")
-    public String getRegistrationPage() {
-        return "sign_up";
-    }
-
-    @PostMapping("/sign_up")
-    public String registerNewUser(@ModelAttribute NewUserRegistrationDto newUser) {
-        var passwordHash = passwordEncoder.encode(newUser.getPassword());
-        newUser.setPassword(passwordHash);
-        userDetailsServiceImpl.addNewUser(newUser);
-        return "redirect:/sign_in";
-    }
-
     @GetMapping("/mainpage")
     public String getStartPage(Model model) {
-        model.addAttribute("user", (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        model.addAttribute("user", userDetailsServiceImpl.getUserForMainPageByUsename(username));
         return "mainpage";
-    }
-
-    @GetMapping("/user_page")
-    public String getCurrentUserPage(Model model) {
-        model.addAttribute("user", (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        return "user_page";
-    }
-
-    @PostMapping("/user_page/become_creator")
-    public String addNewCreatorByUser(@ModelAttribute NewCreatorDto newCreatorDto) {
-        var currentUser = (User) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-        newCreatorDto.setUser(currentUser);
-        creatorService.addNewCreator(newCreatorDto);
-        userDetailsServiceImpl.changeUserAuthority(currentUser, "MUSICIAN");
-        return "redirect:/user_page";
-    }
-
-    @GetMapping("/search")
-    public String getSearchPage() {
-        return "search";
     }
 
     @GetMapping("/whatsnew")
@@ -83,7 +44,7 @@ public class MainController {
 
     @GetMapping("/recomendation")
     public String getRecomendation() {
-        return "recomendation";
+        return "recommendation";
     }
 
     @GetMapping("/musician_panel/creator/{id}")

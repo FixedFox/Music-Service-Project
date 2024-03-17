@@ -48,7 +48,7 @@ public class WebSecurityConfiguration {
                         .antMatchers("/sign_up", "/sign_in", "/").permitAll()
                         .antMatchers("/musician_panel", "/musician_panel/**").hasAuthority("MUSICIAN")
                         .antMatchers("/*").authenticated())
-                .formLogin(login -> login.loginPage("/sign_in").defaultSuccessUrl("/mainpage"));
+                .formLogin(login -> login.loginPage("/sign_in").defaultSuccessUrl("/mainpage")).logout(a -> a.logoutSuccessUrl("/"));
         return http.build();
     }
 }
