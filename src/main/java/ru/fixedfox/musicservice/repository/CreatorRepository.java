@@ -1,10 +1,17 @@
 package ru.fixedfox.musicservice.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import ru.fixedfox.musicservice.entity.Creator;
+
+import java.util.Optional;
+import java.util.Set;
 
 public interface CreatorRepository extends JpaRepository<Creator, Long> {
 
-    public Creator getCreatorByCreatorName(String name);
+    public Set<Creator> findByCreatorNameContainingIgnoreCase(String name);
+
+    public Set<Creator> findByUser_Id(Long userId);
+
+    public Optional<Creator> findById(Long creatorId);
+
 }

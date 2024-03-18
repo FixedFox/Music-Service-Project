@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Композиция</title>
+    <title>Композиция [[${track.getTrackName()}]]</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
 </head>
 <body>
-<h1>Страница композиции ~name~</h1>
+<div class="container">
+    <h1>[[${track.getTrackName()}]]</h1>
+    <a href="/musician_panel/tracks">Назад</a>
+    <div class="editonefield">
+        <form method="POST" th:action="'/musician_panel/tracks/' + ${track.getTrackId()}">
+            <input type="text" name="itemName" th:value="${track.getTrackName()}">
+            <button type="submit">Edit!</button>
+        </form>
+    </div>
+    <h3>Исполнители:</h3>
+    <div class="creatoritem" th:each="trackCreator :${track.getCreators()}">
+        <img th:src="@{/imgs/creator.svg}">
+        <span class="creatoritemtext">[[${trackCreator.getCreatorName()}]]</span>
+    </div>
+    <div class="editonefield">
+        <form method="post" th:action="'/musician_panel/tracks/addCreator/'+${track.getTrackId()}">
+            <label>Добавить автора</label>
+            <select name="creatorId">
+                <option th:each="creator: ${creators}" th:value="${creator.getId()}"
+                        th:text="${creator.getCreatorName()}"></option>
+            </select>
+            <button type="submit">Добавить!</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

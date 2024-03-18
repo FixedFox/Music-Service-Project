@@ -20,10 +20,6 @@ public class Tracklist {
     @JoinColumn(name = "tracklist_type_id", nullable = false)
     private TracklistType tracklistType;
 
-    @ManyToMany
-    private Set<Track> tracks = new LinkedHashSet<>();
-
-
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
@@ -34,7 +30,18 @@ public class Tracklist {
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
+
+
     @ManyToMany
+    @JoinTable(name = "tracks_tracklists",
+            joinColumns = @JoinColumn(name = "tracklist_id") ,
+            inverseJoinColumns = @JoinColumn(name = "track_id"))
+    private Set<Track> tracks = new LinkedHashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "creators_tracklists",
+            joinColumns = @JoinColumn(name = "tracklist_id"),
+            inverseJoinColumns = @JoinColumn(name = "creator_id"))
     private Set<Creator> creators = new LinkedHashSet<>();
 
     public Set<Creator> getCreators() {
@@ -43,6 +50,21 @@ public class Tracklist {
 
     public void setCreators(Set<Creator> creators) {
         this.creators = creators;
+    }
+
+    public Set<Track> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(Set<Track> tracks) {
+        this.tracks = tracks;
+    }
+
+    public void addCreator(Creator creator) {
+        this.creators.add(creator);
+    }
+    public void removeCreator(Creator creator) {
+        this.creators.remove(creator);
     }
 
     public Genre getGenre() {
@@ -69,12 +91,11 @@ public class Tracklist {
         this.name = name;
     }
 
-    public Set<Track> getTracks() {
-        return tracks;
+    public void addTrack(Track track) {
+        this.tracks.add(track);
     }
-
-    public void setTracks(Set<Track> tracks) {
-        this.tracks = tracks;
+    public void removeTrack(Track track) {
+        this.tracks.remove(track);
     }
 
     public TracklistType getTracklistType() {

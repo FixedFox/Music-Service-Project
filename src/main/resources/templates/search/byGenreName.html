@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Поиск альбомов</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
+</head>
+<body>
+<div class="container">
+  <h1>Поиск жанров</h1>
+  <a href="/search">Вернуться назад</a>
+  <div th:each="tracklist :${findTracklists}" class="trackitem">
+    [[${tracklist.getName()}]]
+    <!--        Написать добавление в коллекцию-->
+    <span>+</span>
+  </div>
+</div>
+</body>
+</html>

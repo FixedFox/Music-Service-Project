@@ -11,9 +11,15 @@
   <a href="/musician_panel/tracklists/addNewTracklist">Добавить новую коллекцию композиций</a>
   <a href="/musician_panel">Назад к панели музыканта</a>
   <div class="tracklistitem" th:each="tracklist :${tracklists}">
-    <span th:text="${tracklist.getName()}"></span>
+    <img th:src="@{/imgs/list.svg}">
+    <a th:href="'/musician_panel/tracklists/'+${tracklist.getId()}" th:text="${tracklist.getName()}"></a>
+    <span> - </span>
     <span th:text="${tracklist.getTracklistType().getTracklistTypeName()}"></span>
+    <span> - </span>
     <span th:text="${tracklist.getGenre().getGenreName()}"></span>
+    <form method="POST" th:action="'/musician_panel/tracklists/delete/'+${tracklist.getId()}">
+      <button type="submit">Del!</button>
+    </form>
   </div>
 </div>
 </body>

@@ -1,8 +1,11 @@
 package ru.fixedfox.musicservice.entity;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -32,14 +35,41 @@ public class Track {
             inverseJoinColumns = @JoinColumn(name = "creator_id"))
     private Set<Creator> creators = new LinkedHashSet<>();
 
+
+    @ManyToMany(mappedBy = "tracks")
+    private Set<Tracklist> tracklists = new LinkedHashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<Tracklist> getTracklists() {
+        return tracklists;
+    }
+
+    public void setTracklists(Set<Tracklist> tracklists) {
+        this.tracklists = tracklists;
+    }
+
+
     public Set<Creator> getCreators() {
         return creators;
     }
-
     public void setCreators(Set<Creator> creators) {
         this.creators = creators;
     }
 
+    public void addCreator(Creator creator) {
+        creators.add(creator);
+    }
     public Track() {
     }
 
@@ -81,5 +111,18 @@ public class Track {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Track track = (Track) o;
+        return trackId != null && Objects.equals(trackId, track.trackId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

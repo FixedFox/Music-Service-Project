@@ -29,7 +29,7 @@ public class UserPageController {
     @GetMapping
     public String getCurrentUserPage(Model model) {
         String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-        model.addAttribute("user", userDetailsServiceImpl.loadUserWithCreatorsByUsername(username));
+        model.addAttribute("user", userDetailsServiceImpl.loadNameWithCreatorsByUsername(username));
         return "user_page";
     }
 

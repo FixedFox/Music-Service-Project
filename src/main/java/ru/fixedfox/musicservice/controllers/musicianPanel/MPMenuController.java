@@ -16,8 +16,6 @@ public class MPMenuController {
         this.genreService = genreService;
         this.trackService = trackService;
     }
-
-
     @GetMapping
     public String getMusicianPanel() {
         return "musician_panel";

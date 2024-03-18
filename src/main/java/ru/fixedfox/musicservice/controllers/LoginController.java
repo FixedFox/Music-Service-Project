@@ -9,11 +9,11 @@ import ru.fixedfox.musicservice.dto.NewUserRegistrationDto;
 import ru.fixedfox.musicservice.services.UserDetailsServiceImpl;
 
 @Controller
-public class SecurityController {
+public class LoginController {
     private final UserDetailsServiceImpl userDetailsServiceImpl;
     private final PasswordEncoder passwordEncoder;
 
-    public SecurityController(UserDetailsServiceImpl userDetailsServiceImpl, PasswordEncoder passwordEncoder) {
+    public LoginController(UserDetailsServiceImpl userDetailsServiceImpl, PasswordEncoder passwordEncoder) {
         this.userDetailsServiceImpl = userDetailsServiceImpl;
         this.passwordEncoder = passwordEncoder;
     }

@@ -8,10 +8,13 @@
 <body>
 <div class="container">
     <h1>Genres</h1>
-    <form method="POST" action="/musicianpanel/genres/add">
-        <input type="text" name="genreName">
-        <button type="submit">Добавить!</button>
-    </form>
+    <a href="/musician_panel">Назад к панели музыканта</a>
+    <div class="editonefield">
+        <form method="POST" action="/musicianpanel/genres/add">
+            <input type="text" name="genreName">
+            <button type="submit">Добавить!</button>
+        </form>
+    </div>
     <div class="genreitem" th:each="genre :${genres}">
         <div>
             <span th:text="${genre.getGenreName()}"></span>
@@ -19,7 +22,6 @@
                th:href="@{'genres/delete/' + ${genre.getGenreId()}}">Del!</a>
         </div>
     </div>
-    <a href="/musician_panel">Назад к панели музыканта</a>
 </div>
 </body>
 </html>

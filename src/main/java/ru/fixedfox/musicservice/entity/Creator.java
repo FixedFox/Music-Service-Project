@@ -1,7 +1,10 @@
 package ru.fixedfox.musicservice.entity;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -24,6 +27,17 @@ public class Creator {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToMany(mappedBy = "creators")
+    private Set<Tracklist> tracklists = new LinkedHashSet<>();
+
+    public Set<Tracklist> getTracklists() {
+        return tracklists;
+    }
+
+    public void setTracklists(Set<Tracklist> tracklists) {
+        this.tracklists = tracklists;
+    }
 
     public User getUser() {
         return user;
@@ -63,5 +77,18 @@ public class Creator {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Creator creator = (Creator) o;
+        return id != null && Objects.equals(id, creator.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

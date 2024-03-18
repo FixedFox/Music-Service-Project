@@ -29,8 +29,8 @@ a {
     text-decoration: none;
     display: inline-block;
     background-color: #007AFF;
-    padding: 14px 20px;
-    height: 50px;
+    padding: 10px 20px;
+    height: 40px;
     border-radius: 12px;
     color: white;
     margin: 8px;
@@ -45,10 +45,12 @@ h3 {
 }
 
 .genreitem {
-    display: block;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     background-color: white;
     height: 60px;
-    width: 320px;
+    width: 400px;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
@@ -56,10 +58,12 @@ h3 {
 
 }
 .trackitem {
-    display: block;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     background-color: white;
     height: 60px;
-    width: 320px;
+    width: 400px;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
@@ -67,35 +71,46 @@ h3 {
 
 }
 .tracklistitem {
-    display: block;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     background-color: white;
     height: 60px;
-    width: 320px;
+    width: 400px;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
     margin-top: 10px;
-
 }
 .creatoritem {
     display: flex;
+    justify-content: flex-start;
     align-items: center;
-    text-align: left;
     background-color: white;
     height: 60px;
-    width: 320px;
+    width: 400px;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
     margin-top: 10px;
 }
 .creatoritemtext {
+    display: flex;
     margin-left: 10px;
     font-size: 12pt;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: white;
+    height: 60px;
+    width: 400px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 .creatoritemtext:hover {
     color: gray;

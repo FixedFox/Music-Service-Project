@@ -10,7 +10,6 @@ import ru.fixedfox.musicservice.entity.User;
 import ru.fixedfox.musicservice.repository.AuthorityRepository;
 import ru.fixedfox.musicservice.repository.UserRepository;
 
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,12 +31,26 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return user;
     }
 
-    public GetUserCreatorsDto loadUserWithCreatorsByUsername(String username) {
+    public User findUserByUsername(String username) throws UsernameNotFoundException {
+        var user =  userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(
+                String.format("User '%s' not found",  username)));
+        return user;
+    }
+
+    public GetUserCreatorsDto loadNameWithCreatorsByUsername(String username) {
         var userDto = new GetUserCreatorsDto();
         var user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(
                 String.format("User '%s' not found",  username)));
         userDto.setName(user.getName());
         userDto.setCreators(user.getCreators());
+        return userDto;
+    }
+    public GetUserTracksDto loadNameWithTracksByUsername(String username) {
+        var userDto = new GetUserTracksDto();
+        var user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(
+                String.format("User '%s' not found",  username)));
+        userDto.setName(user.getName());
+        userDto.setTracks(user.getTracks());
         return userDto;
     }
 

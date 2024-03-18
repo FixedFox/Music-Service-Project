@@ -46,12 +46,4 @@ public class MainController {
     public String getRecomendation() {
         return "recommendation";
     }
-
-    @GetMapping("/musician_panel/creator/{id}")
-    public String getPageWithCreator(@PathVariable Long id, Model model) {
-        model.addAttribute("creator", creatorService.getCreatorById(id));
-        return "musician_panel/creator";
-    }
-
-
 }
