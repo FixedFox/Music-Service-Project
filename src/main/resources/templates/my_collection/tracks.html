@@ -1,11 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Композиции</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
 </head>
 <body>
-<div class="container"></div>
+<div class="container">
+    <h1>Все композиции:</h1>
+    <menu>
+        <a class="backButton" href="/my_collection"><img src="/imgs/backButton.svg"></a>
+    </menu>
+    <div class="trackitem" th:each="track :${tracks.getTracks()}">
+        <img th:src="@{/imgs/note.svg}">
+        <span class="creatoritemtext"
+              th:text="${track.getTrackName()} + ' - ' + ${track.getGenre().getGenreName()}"></span>
+        <form method="POST" th:action="@{'/my_collection/tracks/delete/'+${track.getTrackId()}}">
+            <button type="submit">Del!</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

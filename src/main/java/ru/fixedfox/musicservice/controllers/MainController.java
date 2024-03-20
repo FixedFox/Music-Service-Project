@@ -37,12 +37,7 @@ public class MainController {
         return "mainpage";
     }
 
-    @GetMapping("/whatsnew")
-    public String getWhatsNewPage() {
-        return "whatsnew";
-    }
-
-    @GetMapping("/recomendation")
+    @GetMapping("/recommendation")
     public String getRecomendation() {
         return "recommendation";
     }

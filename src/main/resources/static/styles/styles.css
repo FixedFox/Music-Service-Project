@@ -10,6 +10,11 @@ body {
     height: auto;
 }
 
+menu {
+    height: 56px;
+    width: auto;
+}
+
 .container {
     display: block;
     max-width: 1170px;
@@ -42,6 +47,13 @@ h1 {
 }
 h3 {
     text-align: left;
+}
+
+.itemContainer {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    width: auto;
 }
 
 .genreitem {
@@ -95,22 +107,12 @@ h3 {
     margin-top: 10px;
 }
 .creatoritemtext {
-    display: flex;
     margin-left: 10px;
     font-size: 12pt;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: white;
-    height: 60px;
-    width: 400px;
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 10px;
-    margin-top: 10px;
 }
 .creatoritemtext:hover {
     color: gray;
@@ -128,6 +130,7 @@ h3 {
     width: 345px;
     border-radius: 10px;
     padding: 10px;
+    margin-bottom: 8px;
 }
 .edittwofield {
     display: flex;
@@ -139,4 +142,8 @@ h3 {
     width: 345px;
     border-radius: 10px;
     padding: 10px;
+}
+
+.backButton {
+    background-color: transparent;
 }

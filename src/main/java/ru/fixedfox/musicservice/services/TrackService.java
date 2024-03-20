@@ -30,10 +30,6 @@ public class TrackService {
         trackRepository.save(track);
     }
 
-    public Set<Track> findTracksByName(String name) {
-        return trackRepository.findByTrackNameContainingIgnoreCase(name);
-    }
-
     public void addCreatorToTrack(EditCreatorInItemDto track) {
         var trackFromBase = findTrackById(track.getItemId());
         trackFromBase.addCreator(track.getCreator());
@@ -50,5 +46,9 @@ public class TrackService {
         var trackFromBase = findTrackById(track.getItemId());
         trackFromBase.setTrackName(track.getItemName());
         trackRepository.save(trackFromBase);
+    }
+
+    public Set<Track> findTracksTracklistsCreatorsByName(String name, Long userId) {
+       return trackRepository.findAllByTrackTracklistCreatorNameWithUserId(name, userId);
     }
 }

@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Tracks</title>
+    <title>Композиции</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
 </head>
 <body>
 <div class="container">
-    <h1>Tracks</h1>
-    <a href="/musician_panel/tracks/addNewTrack">Добавить новую композицию</a>
-    <a href="/musician_panel">Назад к панели музыканта</a>
-    <div class="trackitem" th:each="track :${tracks}">
-        <img th:src="@{/imgs/note.svg}">
-        <a th:href="@{'/musician_panel/tracks/'+${track.getTrackId()}}"><span class="creatoritemtext">[[${track.getTrackName()}]]</span></a>
-        <span>Жанр:[[${track.getGenre().getGenreName()}]]</span>
-        <form method="POST" th:action="@{'/musician_panel/tracks/delete/'+${track.getTrackId()}}">
-            <button type="submit">Del!</button>
-        </form>
+    <h1>Композиции</h1>
+    <menu>
+        <a class="backButton" href="/musician_panel"><img src="/imgs/backButton.svg"></a>
+        <a href="/musician_panel/tracks/addNewTrack">Добавить новую композицию</a>
+        <a href="/musician_panel">Назад к панели музыканта</a>
+    </menu>
+    <div class="itemContainer">
+        <div class="trackitem" th:each="track :${tracks.getTracks()}">
+            <img th:src="@{/imgs/note.svg}">
+            <a th:href="@{'/musician_panel/tracks/'+${track.getTrackId()}}"><span class="creatoritemtext">[[${track.getTrackName()}]]</span></a>
+            <span>Жанр:[[${track.getGenre().getGenreName()}]]</span>
+            <form method="POST" th:action="@{'/musician_panel/tracks/delete/'+${track.getTrackId()}}">
+                <button type="submit">Del!</button>
+            </form>
+        </div>
     </div>
 </div>
 </body>

@@ -10,9 +10,10 @@
     <h1>Поиск песен</h1>
     <a href="/search">Вернуться назад</a>
     <div th:each="track :${findTracks}" class="trackitem">
-        [[${track.getTrackName()}]]
-        <!--        Написать добавление в коллекцию-->
-        <span>+</span>
+        <span>[[${track.getTrackName()}]]</span>
+        <form method="POST" th:action="'/search/tracks/add/'+${track.getTrackId()}">
+            <button type="submit">+</button>
+        </form>
     </div>
 </div>
 </body>

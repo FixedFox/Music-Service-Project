@@ -31,6 +31,17 @@ public class Creator {
     @ManyToMany(mappedBy = "creators")
     private Set<Tracklist> tracklists = new LinkedHashSet<>();
 
+    @ManyToMany(mappedBy = "subscribtions")
+    private Set<User> users = new LinkedHashSet<>();
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
     public Set<Tracklist> getTracklists() {
         return tracklists;
     }

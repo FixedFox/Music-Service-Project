@@ -2,19 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Жанры</title>
+    <title>Title</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
 </head>
 <body>
 <div class="container">
-    <h1>Все Жанры</h1>
+    <h1>Все Альбомы:</h1>
     <menu>
         <a class="backButton" href="/my_collection"><img src="/imgs/backButton.svg"></a>
     </menu>
-    <div class="trackitem" th:each="genre :${genres}">
-        <img th:src="@{/imgs/note.svg}">
+    <div class="trackitem" th:each="tracklist :${tracklists}">
+        <img th:src="@{/imgs/list.svg}">
         <span class="creatoritemtext"
-              th:text="${genre.getGenreName()}"></span>
+              th:text="${tracklist.getName()} +
+               ' - ' +
+               ${tracklist.getTracklistType.getTracklistTypeName()} +
+               ' - ' +
+               ${tracklist.getGenre().getGenreName()}"></span>
     </div>
 </div>
 </body>

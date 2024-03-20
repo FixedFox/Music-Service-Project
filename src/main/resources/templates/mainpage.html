@@ -2,22 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>StartPage</title>
+    <title>Меню</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
 </head>
 <body>
 <div class="container">
-    <h1>Hello [[${user.getName()}]]</h1>
-    <a style="background-color: #FF2D55" href="/logout"><img src="imgs/exit.svg"></a>
-    <a href="/user_page">Страница пользователя</a><br>
-    <a href="/my_collection">MyCollection</a>
-    <a href="/recommendation">Рекомендации</a>
-    <a href="/search">Search</a>
-    <a href="/whatsnew">What's new</a>
-    <a href="/musician_panel"
-        th:if="${user.isAuthority('MUSICIAN')}">Musician panel</a>
-    <a href="/admin_panel/users"
-        th:if="${user.isAuthority('ADMIN')}">Admin panel</a>
+    <h1>Привет, [[${user.getName()}]]</h1>
+    <menu>
+        <a style="background-color: #FF2D55" href="/logout"><img src="imgs/exit.svg"></a>
+        <a href="/user_page">Пользователь</a>
+        <a href="/my_collection">Библиотека</a>
+        <a href="/subscriptions">Подписки</a>
+        <a href="/search">Поиск</a>
+        <a href="/recommendation">Рекомендации</a>
+        <a href="/musician_panel"
+           th:if="${user.isAuthority('MUSICIAN')}">Панель музыканта</a>
+    </menu>
 </div>
 </body>
 </html>

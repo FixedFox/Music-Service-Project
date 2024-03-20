@@ -38,6 +38,64 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private Set<Track> tracks = new LinkedHashSet<>();
 
+    @ManyToMany
+    @JoinTable(name = "librarys",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "track_id"))
+    private Set<Track> librarytracks = new LinkedHashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "subscriptions",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "creators_id"))
+    private Set<Creator> subscribtions = new LinkedHashSet<>();
+
+    @Column(name = "telegram_nickname")
+    private String telegramNickname;
+
+    @Column(name = "telegram_id")
+    private Long telegram_id;
+
+    public Long getTelegram_id() {
+        return telegram_id;
+    }
+
+    public void setTelegram_id(Long telegram_id) {
+        this.telegram_id = telegram_id;
+    }
+
+    public String getTelegramNickname() {
+        return telegramNickname;
+    }
+
+    public void setTelegramNickname(String telegramNickname) {
+        this.telegramNickname = telegramNickname;
+    }
+
+    public Set<Creator> getSubscribtions() {
+        return subscribtions;
+    }
+
+    public void setSubscribtions(Set<Creator> subscribtions) {
+        this.subscribtions = subscribtions;
+    }
+
+    public Set<Track> getLibrarytracks() {
+        return librarytracks;
+    }
+
+    public void setLibrarytracks(Set<Track> librarytracks) {
+        this.librarytracks = librarytracks;
+    }
+
+    public void addLibrarytrack(Track track) {
+        librarytracks.add(track);
+    }
+
+    public void removeLibrarytrack(Track track) {
+        librarytracks.remove(track);
+    }
+
     public Set<Track> getTracks() {
         return tracks;
     }

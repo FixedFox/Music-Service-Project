@@ -8,7 +8,9 @@
 <body>
 <div class="container">
     <h1 th:text="${tracklist.getName()}"></h1>
-    <a href="/musician_panel/tracklists">Назад</a>
+    <menu>
+        <a class="backButton" href="/musician_panel/tracklists"><img src="/imgs/backButton.svg"></a>
+    </menu>
     <span th:text="${tracklist.getTracklistType().getTracklistTypeName()}"></span>
     <span th:text="${tracklist.getGenre().getGenreName()}"></span>
     <div class="editonefield">

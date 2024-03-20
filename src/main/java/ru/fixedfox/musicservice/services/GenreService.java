@@ -6,6 +6,7 @@ import ru.fixedfox.musicservice.repository.GenreRepository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class GenreService {
@@ -30,5 +31,9 @@ public class GenreService {
 
     public void deleteById(Integer id) {
         genreRepository.deleteById(id);
+    }
+
+    public Set<Genre> getGenresByLibraryUserId(Long userId) {
+        return genreRepository.getGenresByLibraryUserId(userId);
     }
 }

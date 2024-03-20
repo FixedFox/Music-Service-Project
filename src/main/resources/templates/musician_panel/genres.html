@@ -1,25 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Genres</title>
+    <title>Жанры</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
 </head>
 <body>
 <div class="container">
-    <h1>Genres</h1>
-    <a href="/musician_panel">Назад к панели музыканта</a>
+    <h1>Жанры</h1>
+    <menu>
+        <a class="backButton" href="/musician_panel"><img src="/imgs/backButton.svg"></a>
+    </menu>
     <div class="editonefield">
         <form method="POST" action="/musicianpanel/genres/add">
             <input type="text" name="genreName">
             <button type="submit">Добавить!</button>
         </form>
     </div>
-    <div class="genreitem" th:each="genre :${genres}">
-        <div>
-            <span th:text="${genre.getGenreName()}"></span>
-            <a style="height: 34px; border-radius: 40px; background-color: #FF3B30"
-               th:href="@{'genres/delete/' + ${genre.getGenreId()}}">Del!</a>
+    <div class="itemContainer">
+        <div class="genreitem" th:each="genre :${genres}">
+            <div>
+                <span th:text="${genre.getGenreName()}"></span>
+                <a style="height: 34px; border-radius: 40px; background-color: #FF3B30"
+                   th:href="@{'genres/delete/' + ${genre.getGenreId()}}">Del!</a>
+            </div>
         </div>
     </div>
 </div>

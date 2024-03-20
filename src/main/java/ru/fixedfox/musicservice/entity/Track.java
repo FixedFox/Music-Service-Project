@@ -43,6 +43,18 @@ public class Track {
     @JoinColumn(name = "user_id")
     private User user;
 
+
+    @ManyToMany(mappedBy = "librarytracks")
+    private Set<User> users = new LinkedHashSet<>();
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
     public User getUser() {
         return user;
     }

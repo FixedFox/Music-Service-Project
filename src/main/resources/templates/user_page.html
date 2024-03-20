@@ -8,7 +8,9 @@
 <body>
 <div class="container">
     <h1>Привет, [[${user.getName()}]]</h1>
-    <a href="/mainpage">Вернуться в меню</a>
+    <menu>
+        <a class="backButton" href="/mainpage"><img src="/imgs/backButton.svg"></a>
+    </menu>
     <h3>Изменить ник</h3>
     <div class="editonefield">
         <form method="POST" action="user_page/change_name">

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Musician Panel</title>
+    <title>Панель музыканта</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
 </head>
 <body>
 <div class="container">
-    <h1>Musician Panel</h1>
-    <a href="/musician_panel/tracks">Треки</a>
-    <a href="/musician_panel/tracklists">Альбомы</a>
-    <a href="/musician_panel/genres">Жанры</a>
-    <a href="/mainpage">На главную</a>
+    <h1>Панель музыканта</h1>
+    <menu>
+        <a class="backButton" href="/mainpage"><img src="/imgs/backButton.svg"></a>
+        <a href="/musician_panel/tracks">Треки</a>
+        <a href="/musician_panel/tracklists">Альбомы</a>
+        <a href="/musician_panel/genres">Жанры</a>
+    </menu>
 </div>
 </body>
 </html>

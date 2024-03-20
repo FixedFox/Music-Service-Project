@@ -10,6 +10,7 @@ import ru.fixedfox.musicservice.entity.User;
 import ru.fixedfox.musicservice.repository.AuthorityRepository;
 import ru.fixedfox.musicservice.repository.UserRepository;
 
+import javax.transaction.Transactional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,9 +20,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final AuthorityRepository authorityRepository;
 
-    public UserDetailsServiceImpl(UserRepository userRepository, AuthorityRepository authorityRepository) {
+    private final TrackService trackService;
+
+    public UserDetailsServiceImpl(UserRepository userRepository, AuthorityRepository authorityRepository, TrackService trackService) {
         this.userRepository = userRepository;
         this.authorityRepository = authorityRepository;
+        this.trackService = trackService;
     }
 
     @Override
@@ -93,5 +97,31 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         userDto.setAuthorities(userFromBase.getAuthorities().stream().map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet()));
         return userDto;
+    }
+
+    public AllLibraryTracksDto getAllLibraryTracksByUsername(String username) {
+        var userLibraryTracks = new AllLibraryTracksDto();
+        var userFromBase =  userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(
+                String.format("User '%s' not found", username)));
+        userLibraryTracks.setTracks(userFromBase.getLibrarytracks());
+        return userLibraryTracks;
+    }
+
+    @Transactional
+    public void addTrackToMyLibraryById(EditTrackMyLibraryDto trackFromLibrary){
+        var userFromBase =  userRepository.findByUsername(trackFromLibrary.getUsername()).orElseThrow(() -> new UsernameNotFoundException(
+                String.format("User '%s' not found", trackFromLibrary.getUsername())));
+        var track = trackService.findTrackById(trackFromLibrary.getTrackId());
+        userFromBase.addLibrarytrack(track);
+        userRepository.save(userFromBase);
+    }
+
+    @Transactional
+    public void deleteTrackFromMyLibraryById(EditTrackMyLibraryDto trackFromLibrary){
+        var userFromBase =  userRepository.findByUsername(trackFromLibrary.getUsername()).orElseThrow(() -> new UsernameNotFoundException(
+                String.format("User '%s' not found", trackFromLibrary.getUsername())));
+        var track = trackService.findTrackById(trackFromLibrary.getTrackId());
+        userFromBase.removeLibrarytrack(track);
+        userRepository.save(userFromBase);
     }
 }

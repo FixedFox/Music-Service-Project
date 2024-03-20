@@ -1,26 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Albums</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
+    <meta charset="UTF-8">
+    <title>Альбомы</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
 </head>
 <body>
 <div class="container">
-  <h1>Albums</h1>
-  <a href="/musician_panel/tracklists/addNewTracklist">Добавить новую коллекцию композиций</a>
-  <a href="/musician_panel">Назад к панели музыканта</a>
-  <div class="tracklistitem" th:each="tracklist :${tracklists}">
-    <img th:src="@{/imgs/list.svg}">
-    <a th:href="'/musician_panel/tracklists/'+${tracklist.getId()}" th:text="${tracklist.getName()}"></a>
-    <span> - </span>
-    <span th:text="${tracklist.getTracklistType().getTracklistTypeName()}"></span>
-    <span> - </span>
-    <span th:text="${tracklist.getGenre().getGenreName()}"></span>
-    <form method="POST" th:action="'/musician_panel/tracklists/delete/'+${tracklist.getId()}">
-      <button type="submit">Del!</button>
-    </form>
-  </div>
+    <h1>Альбомы</h1>
+    <menu>
+        <a class="backButton" href="/musician_panel"><img src="/imgs/backButton.svg"></a>
+        <a href="/musician_panel/tracklists/addNewTracklist">Добавить новую коллекцию композиций</a>
+    </menu>
+    <div class="itemContainer">
+        <div class="tracklistitem" th:each="tracklist :${tracklists}">
+            <img th:src="@{/imgs/list.svg}">
+            <a th:href="'/musician_panel/tracklists/'+${tracklist.getId()}" th:text="${tracklist.getName()}"></a>
+            <span> - </span>
+            <span th:text="${tracklist.getTracklistType().getTracklistTypeName()}"></span>
+            <span> - </span>
+            <span th:text="${tracklist.getGenre().getGenreName()}"></span>
+            <form method="POST" th:action="'/musician_panel/tracklists/delete/'+${tracklist.getId()}">
+                <button type="submit">Del!</button>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>

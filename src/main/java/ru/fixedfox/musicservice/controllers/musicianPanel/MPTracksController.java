@@ -31,7 +31,8 @@ public class MPTracksController {
 
     @GetMapping
     public String getMusicianPanelSongs(Model model) {
-        model.addAttribute("tracks", trackService.getAllTracksOfCreator());
+        var userName = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        model.addAttribute("tracks", userDetailsService.loadNameWithTracksByUsername(userName));
         return "musician_panel/tracks";
     }
 

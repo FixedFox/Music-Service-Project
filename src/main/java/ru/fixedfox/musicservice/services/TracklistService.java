@@ -86,4 +86,8 @@ public class TracklistService {
         tracklistFromBase.setName(tracklist.getItemName());
         tracklistRepository.save(tracklistFromBase);
     }
+
+    public Set<Tracklist> findTracklistsByUserLibrary(Long userId) {
+        return tracklistRepository.findTracklistsByLibraryUserId(userId);
+    }
 }

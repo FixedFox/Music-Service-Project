@@ -8,7 +8,9 @@
 <body>
 <div class="container">
     <h1>[[${track.getTrackName()}]]</h1>
-    <a href="/musician_panel/tracks">Назад</a>
+    <menu>
+        <a class="backButton" href="/musician_panel/tracks"><img src="/imgs/backButton.svg"></a>
+    </menu>
     <div class="editonefield">
         <form method="POST" th:action="'/musician_panel/tracks/' + ${track.getTrackId()}">
             <input type="text" name="itemName" th:value="${track.getTrackName()}">

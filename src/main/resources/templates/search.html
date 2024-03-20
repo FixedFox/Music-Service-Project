@@ -8,20 +8,12 @@
 <body>
 <div class="container">
     <h1>Search Page</h1>
-    <a href="mainpage">На главную</a>
+    <menu>
+        <a class="backButton" href="/mainpage"><img src="/imgs/backButton.svg"></a>
+    </menu>
     <form method="GET" action="/search/tracks" class="editonefield">
         <label>Искать композицию</label>
-        <input name="track_name" type="text" placeholder="Композиция">
-        <button type="submit">Искать!</button>
-    </form>
-    <form method="GET" action="/search/creators" class="editonefield">
-        <label>Искать автора</label>
-        <input name="creator_name" type="text" placeholder="Автор">
-        <button type="submit">Искать!</button>
-    </form>
-    <form method="GET" action="/search/tracklists" class="editonefield">
-        <label>Искать альбом</label>
-        <input name="tracklist_name" type="text" placeholder="Альбом">
+        <input name="name" type="text" placeholder="Композиция">
         <button type="submit">Искать!</button>
     </form>
 </div>
