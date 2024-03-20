@@ -34,7 +34,7 @@ a {
     text-decoration: none;
     display: inline-block;
     background-color: #007AFF;
-    padding: 10px 20px;
+    padding: 10px 10px;
     height: 40px;
     border-radius: 12px;
     color: white;
@@ -75,11 +75,12 @@ h3 {
     align-items: center;
     background-color: white;
     height: 60px;
-    width: 400px;
+    width: 360px;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
     margin-top: 10px;
+    margin-right: 10px;
 
 }
 .tracklistitem {
@@ -100,15 +101,15 @@ h3 {
     align-items: center;
     background-color: white;
     height: 60px;
-    width: 400px;
+    width: 272px;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
     margin-top: 10px;
+    margin-right: 10px;
 }
 .creatoritemtext {
     margin-left: 10px;
-    font-size: 12pt;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -142,6 +143,19 @@ h3 {
     width: 345px;
     border-radius: 10px;
     padding: 10px;
+}
+
+.telegramEditField {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    background-color: white;
+    height: 44px;
+    font-size: 17px;
+    width: 540px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 8px;
 }
 
 .backButton {

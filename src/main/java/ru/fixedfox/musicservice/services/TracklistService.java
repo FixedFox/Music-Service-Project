@@ -90,4 +90,12 @@ public class TracklistService {
     public Set<Tracklist> findTracklistsByUserLibrary(Long userId) {
         return tracklistRepository.findTracklistsByLibraryUserId(userId);
     }
+
+    @Transactional
+    public void setPublishTracklistById(Long tracklistId, Boolean publish) {
+        var tracklistFromBase = tracklistRepository.findById(tracklistId).orElseThrow(
+                () -> new UsernameNotFoundException(String.format("Tracklist with id = '%s'", tracklistId)));
+        tracklistFromBase.setPublished(publish);
+        tracklistRepository.save(tracklistFromBase);
+    }
 }

@@ -30,7 +30,8 @@ public class Tracklist {
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
-
+    @Column(name = "published", nullable = false)
+    private Boolean published = false;
 
     @ManyToMany
     @JoinTable(name = "tracks_tracklists",
@@ -43,6 +44,14 @@ public class Tracklist {
             joinColumns = @JoinColumn(name = "tracklist_id"),
             inverseJoinColumns = @JoinColumn(name = "creator_id"))
     private Set<Creator> creators = new LinkedHashSet<>();
+
+    public Boolean isPublished() {
+        return published;
+    }
+
+    public void setPublished(Boolean published) {
+        this.published = published;
+    }
 
     public Set<Creator> getCreators() {
         return creators;

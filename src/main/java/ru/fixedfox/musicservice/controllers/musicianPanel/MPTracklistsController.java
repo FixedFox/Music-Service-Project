@@ -111,4 +111,10 @@ public class MPTracklistsController {
         tracklistService.deleteCreatorFromTracklist(tracklist);
         return String.format("redirect:/musician_panel/tracklists/%d",tracklistId);
     }
+
+    @PostMapping("/setPublish/{tracklistId}")
+    public String setPublishByTracklistId(@PathVariable Long tracklistId, @RequestParam Boolean publish) {
+        tracklistService.setPublishTracklistById(tracklistId, publish);
+        return String.format("redirect:/musician_panel/tracklists/%d",tracklistId);
+    }
 }

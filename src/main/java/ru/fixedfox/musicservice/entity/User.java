@@ -56,7 +56,7 @@ public class User implements UserDetails {
     @Column(name = "telegram_id")
     private Long telegram_id;
 
-    public Long getTelegram_id() {
+    public Long getTelegramid() {
         return telegram_id;
     }
 

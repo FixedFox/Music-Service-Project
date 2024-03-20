@@ -10,6 +10,7 @@ import ru.fixedfox.musicservice.dto.EditPasswordDto;
 import ru.fixedfox.musicservice.dto.NewCreatorDto;
 import ru.fixedfox.musicservice.entity.User;
 import ru.fixedfox.musicservice.services.CreatorService;
+import ru.fixedfox.musicservice.services.TelegramIntegrationService;
 import ru.fixedfox.musicservice.services.UserDetailsServiceImpl;
 
 @Controller
@@ -20,10 +21,16 @@ public class UserPageController {
     private final CreatorService creatorService;
     private final PasswordEncoder passwordEncoder;
 
-    public UserPageController(UserDetailsServiceImpl userDetailsServiceImpl, CreatorService creatorService, PasswordEncoder passwordEncoder) {
+    private final TelegramIntegrationService telegramService;
+
+    public UserPageController(UserDetailsServiceImpl userDetailsServiceImpl,
+                              CreatorService creatorService,
+                              PasswordEncoder passwordEncoder,
+                              TelegramIntegrationService telegramService) {
         this.userDetailsServiceImpl = userDetailsServiceImpl;
         this.creatorService = creatorService;
         this.passwordEncoder = passwordEncoder;
+        this.telegramService = telegramService;
     }
 
     @GetMapping
@@ -69,5 +76,21 @@ public class UserPageController {
         } else {
             return "redirect:/user_page";
         }
+    }
+
+    @PostMapping("/addTelegram")
+    public String addTelegramAccount(@RequestParam String telegramName) {
+        var currentUser = ((User) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal()).getUsername();
+        userDetailsServiceImpl.addTelegramName(currentUser, telegramName);
+        return "redirect:/user_page" ;
+    }
+
+    @PostMapping("/telegramCheck")
+    public String checkTelegramConnection() {
+
+        return "redirect:/user_page";
     }
 }

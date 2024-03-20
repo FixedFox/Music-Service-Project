@@ -31,26 +31,32 @@
     </div>
     <h3>Привязать Telegram</h3>
     <p>Для получения новостей об альбомах артистов на которых ты подписан</p>
-<!--TODO: Добавить возможность проверки, зашёл ли пользователь(привязвл ли свой @username к chat_id)-->
+    <!--TODO: Добавить возможность проверки, зашёл ли пользователь(привязвл ли свой @username к chat_id)-->
     <a href="https://t.me/Musician_WhatsNew_bot">Ссылка на запуск бота</a>
-    <div class="editonefield">
-        <form method="POST" action="user_page/add_telegram">
+    <div class="telegramEditField">
+        <form method="POST" action="user_page/addTelegram">
             <label>Аккаунт Telegram: @</label>
-            <input type="text" name="telegramName" th:value="${user.getName()}" placeholder="@nickname">
+            <input type="text" name="telegramName" th:value="${user.getTelegramName()}" placeholder="nickname">
             <button type="submit">Сохранить!</button>
         </form>
+        <div>
+            <span th:if="${user.isTelegramConnect()}"><a href="/user_page/telegramCheck">Подключен</a></span>
+            <span th:if="${!user.isTelegramConnect()}"><a href="/user_page/telegramCheck">Не подключен</a></span>
+        </div>
     </div>
     <h3>Исполнители добавленные тобой:</h3>
-    <div class="creatoritem" th:each="creator :${user.getCreators()}">
-        <img th:src="@{/imgs/creator.svg}">
-        <span class="creatoritemtext">[[${creator.getCreatorName()}]]</span>
-    </div>
-    <div class="creatoritem">
-        <img th:src="@{/imgs/creator.svg}">
-        <form method="POST" action="user_page/become_creator">
-            <input name="creatorName" placeholder="Добавить исполнителя">
-            <button type="submit">Добавить исполнителя!</button>
-        </form>
+    <div class="itemContainer">
+        <div class="creatoritem" th:each="creator :${user.getCreators()}">
+            <img th:src="@{/imgs/creator.svg}">
+            <span class="creatoritemtext">[[${creator.getCreatorName()}]]</span>
+        </div>
+        <div class="creatoritem">
+            <img th:src="@{/imgs/creator.svg}">
+            <form method="POST" action="user_page/become_creator">
+                <input name="creatorName" placeholder="Добавить исполнителя">
+                <button type="submit">Добавить исполнителя!</button>
+            </form>
+        </div>
     </div>
 </div>
 </body>

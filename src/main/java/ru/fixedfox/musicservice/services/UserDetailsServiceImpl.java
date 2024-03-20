@@ -52,6 +52,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 String.format("User '%s' not found", username)));
         userDto.setName(user.getName());
         userDto.setCreators(user.getCreators());
+        if (user.getTelegramNickname() == null) {
+            userDto.setTelegramName("<empty>");
+            userDto.setTelegramConnect(false);
+        } else {
+            if (user.getTelegramid() == null) {
+                userDto.setTelegramName(user.getTelegramNickname());
+                userDto.setTelegramConnect(false);
+            } else {
+                userDto.setTelegramName(user.getTelegramNickname());
+                userDto.setTelegramConnect(true);
+            }
+        }
+;
+        ;
         return userDto;
     }
 
@@ -151,5 +165,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 String.format("User '%s' not found", username)));
         var creator = creatorService.findCreatorById(creatorId);
         userFromBase.removeSubscription(creator);
+    }
+
+    @Transactional
+    public void addTelegramName(String currentUser, String telegramName) {
+        var userFromBase = userRepository.findByUsername(currentUser).orElseThrow(() -> new UsernameNotFoundException(
+                String.format("User '%s' not found", currentUser)));
+        userFromBase.setTelegramNickname(telegramName);
+        userRepository.save(userFromBase);
     }
 }

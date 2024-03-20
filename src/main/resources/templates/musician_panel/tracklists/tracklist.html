@@ -19,6 +19,13 @@
             <button type="submit">Edit!</button>
         </form>
     </div>
+    <div class="editonefield">
+        <form method="POST" th:action="'/musician_panel/tracklists/setPublish/' + ${tracklist.getId()}">
+            <button type="submit" th:if="${tracklist.isPublished()}" name="publish" value="false">Распубликовать!</button>
+            <button type="submit" th:if="${!tracklist.isPublished()}" name="publish" value="true">Опубликовать!</button>
+        </form>
+
+    </div>
     <h3>Авторы:</h3>
     <div class="creatoritem" th:each="creator :${tracklist.getCreators()}">
         <img th:src="@{/imgs/creator.svg}">
@@ -30,23 +37,29 @@
     </div>
     <form method="POST" th:action="'/musician_panel/tracklists/addCreator/' + ${tracklist.getId()}">
         <select name="creatorId">
-            <option th:each="creator :${userCreators.getCreators()}" th:value="${creator.getId()}" >[[${creator.getCreatorName()}]]</option>
+            <option th:each="creator :${userCreators.getCreators()}" th:value="${creator.getId()}">
+                [[${creator.getCreatorName()}]]
+            </option>
         </select>
         <button type="submit">Добавить!</button>
     </form>
     <h3>Треки:</h3>
-    <div class="trackitem" th:each="track :${tracklist.getTracks()}">
-        <img th:src="@{/imgs/note.svg}">
-        <a th:href="@{'/musician_panel/tracks/'+${track.getTrackId()}}"><span class="creatoritemtext">[[${track.getTrackName()}]]</span></a>
-        <span>Жанр:[[${track.getGenre().getGenreName()}]]</span>
-        <form method="POST" th:action="'/musician_panel/tracklists/delTrack/' + ${tracklist.getId()}">
-            <input type="hidden" name="trackId" th:value="${track.getTrackId()}">
-            <button type="submit">Del!</button>
-        </form>
+    <div class="itemContainer">
+        <div class="trackitem" th:each="track :${tracklist.getTracks()}">
+            <img th:src="@{/imgs/note.svg}">
+            <a th:href="@{'/musician_panel/tracks/'+${track.getTrackId()}}"><span class="creatoritemtext">[[${track.getTrackName()}]]</span></a>
+            <span>Жанр:[[${track.getGenre().getGenreName()}]]</span>
+            <form method="POST" th:action="'/musician_panel/tracklists/delTrack/' + ${tracklist.getId()}">
+                <input type="hidden" name="trackId" th:value="${track.getTrackId()}">
+                <button type="submit">Del!</button>
+            </form>
+        </div>
     </div>
     <form method="POST" th:action="'/musician_panel/tracklists/addTrack/' + ${tracklist.getId()}">
         <select name="trackId">
-            <option th:each="usertrack :${userTracks.getTracks()}" th:value="${usertrack.getTrackId()}" >[[${usertrack.getTrackName()}]]</option>
+            <option th:each="usertrack :${userTracks.getTracks()}" th:value="${usertrack.getTrackId()}">
+                [[${usertrack.getTrackName()}]]
+            </option>
         </select>
         <button type="submit">Добавить!</button>
     </form>
