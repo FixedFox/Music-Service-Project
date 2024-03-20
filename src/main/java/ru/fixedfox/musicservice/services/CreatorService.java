@@ -28,8 +28,8 @@ public class CreatorService {
         creatorRepository.save(creator);
     }
 
-    public Set<Creator> findCreatorsByName(String creator_name) {
-        return creatorRepository.findByCreatorNameContainingIgnoreCase(creator_name);
+    public Set<Creator> findCreatorsByNameByUserId(String creatorName, Long userId) {
+        return creatorRepository.findByCreatorNameByUserId(creatorName, userId);
     }
 
     public Creator findCreatorById(Long creatorId) {

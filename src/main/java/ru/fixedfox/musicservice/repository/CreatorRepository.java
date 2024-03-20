@@ -9,11 +9,9 @@ import java.util.Set;
 
 public interface CreatorRepository extends JpaRepository<Creator, Long> {
 
-    public Set<Creator> findByCreatorNameContainingIgnoreCase(String name);
+    Set<Creator> findByUser_Id(Long userId);
 
-    public Set<Creator> findByUser_Id(Long userId);
-
-    public Optional<Creator> findById(Long creatorId);
+    Optional<Creator> findById(Long creatorId);
 
     @Query(nativeQuery = true, value = "SELECT * FROM creators t1 " +
             "JOIN creators_tracks t2 ON t2.creator_id = t1.id " +
@@ -21,4 +19,9 @@ public interface CreatorRepository extends JpaRepository<Creator, Long> {
             "JOIN librarys t4 ON t4.track_id = t3.id " +
             "WHERE t4.user_id = :userId")
     Set<Creator> getCreatorsByLibraryUserId(Long userId);
+
+@Query(nativeQuery = true, value = "SELECT DISTINCT(t1.id), t1.creator_name, t1.user_id FROM creators t1\n" +
+        "LEFT JOIN subscriptions t2 ON t2.creator_id = t1.id\n" +
+        "WHERE ((t2.user_id <> :userId) OR (t2.user_id IS NULL)) AND (t1.creator_name ILIKE :name)")
+    Set<Creator> findByCreatorNameByUserId(String name, Long userId);
 }

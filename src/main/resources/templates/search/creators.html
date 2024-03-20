@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск авторов</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>Поиск авторов</h1>
+    <a href="/search">Вернуться назад</a>
+    <div th:each="creator :${findCreators}" class="trackitem">
+        <span>[[${creator.getCreatorName()}]]</span>
+        <form method="POST" th:action="'/search/creator/addSubscription/'+${creator.getId()}">
+            <button type="submit">Подписаться!</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

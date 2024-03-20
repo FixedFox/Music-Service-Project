@@ -17,11 +17,9 @@ import ru.fixedfox.musicservice.services.UserDetailsServiceImpl;
 
 @Controller
 public class MainController {
-    private final CreatorService creatorService;
     private final UserDetailsServiceImpl userDetailsServiceImpl;
 
-    public MainController(CreatorService creatorService, UserDetailsServiceImpl userDetailsServiceImpl) {
-        this.creatorService = creatorService;
+    public MainController(UserDetailsServiceImpl userDetailsServiceImpl) {
         this.userDetailsServiceImpl = userDetailsServiceImpl;
     }
 
@@ -38,7 +36,21 @@ public class MainController {
     }
 
     @GetMapping("/recommendation")
-    public String getRecomendation() {
+    public String getRecomendationPage() {
         return "recommendation";
+    }
+
+    @GetMapping("/subscriptions")
+    public String getSubscriptionPage(Model model) {
+        String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        model.addAttribute("creators", userDetailsServiceImpl.getSubscriptionsByUsername(username));
+        return "subscriptions";
+    }
+
+    @PostMapping("/subscriptions/remove/{creatorId}")
+    public String removeCreatorFromUserSubscriptions(@PathVariable Long creatorId) {
+        String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        userDetailsServiceImpl.removeCreatorFromUserSubscriptionsById(creatorId, username);
+        return "redirect:/subscriptions";
     }
 }

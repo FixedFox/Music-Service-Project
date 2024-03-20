@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>Все авторы:</h1>
+    <menu>
+        <a class="backButton" href="/mainpage"><img src="/imgs/backButton.svg"></a>
+    </menu>
+    <div class="trackitem" th:each="creator :${creators}">
+        <img th:src="@{/imgs/creator.svg}">
+        <span class="creatoritemtext"
+              th:text="${creator.getCreatorName()}"></span>
+        <form method="POST" th:action="@{'/subscribtions/delete/'+${creator.getId()}}">
+            <button type="submit">Del!</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

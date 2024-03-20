@@ -11,8 +11,13 @@
     <menu>
         <a class="backButton" href="/mainpage"><img src="/imgs/backButton.svg"></a>
     </menu>
-    <form method="GET" action="/search/tracks" class="editonefield">
+    <form method="post" action="/search/tracks" class="editonefield">
         <label>Искать композицию</label>
+        <input name="name" type="text" placeholder="Композиция">
+        <button type="submit">Искать!</button>
+    </form>
+    <form method="post" action="/search/creators" class="editonefield">
+        <label>Искать автора</label>
         <input name="name" type="text" placeholder="Композиция">
         <button type="submit">Искать!</button>
     </form>

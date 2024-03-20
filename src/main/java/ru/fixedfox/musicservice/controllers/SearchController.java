@@ -16,16 +16,13 @@ import ru.fixedfox.musicservice.services.UserDetailsServiceImpl;
 public class SearchController {
     private final TrackService trackService;
     private final CreatorService creatorService;
-    private final TracklistService tracklistService;
     private final UserDetailsServiceImpl userDetailsService;
 
     public SearchController(TrackService trackService,
                             CreatorService creatorService,
-                            TracklistService tracklistService,
                             UserDetailsServiceImpl userDetailsService) {
         this.trackService = trackService;
         this.creatorService = creatorService;
-        this.tracklistService = tracklistService;
         this.userDetailsService = userDetailsService;
     }
 
@@ -34,10 +31,10 @@ public class SearchController {
         return "search";
     }
 
-    @GetMapping("/tracks")
-    public String getSearchTrackPage (@RequestParam String name, Model model) {
+    @PostMapping("/tracks")
+    public String getSearchTrackPage(@RequestParam String name, Model model) {
         var userId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        var nameForsearh ="%" + name + "%";
+        var nameForsearh = "%" + name + "%";
         model.addAttribute("findTracks", trackService.findTracksTracklistsCreatorsByName(nameForsearh, userId));
         return "search/tracks";
     }
@@ -49,6 +46,21 @@ public class SearchController {
         track.setUsername(username);
         track.setTrackId(id);
         userDetailsService.addTrackToMyLibraryById(track);
+        return "redirect:/search";
+    }
+
+    @PostMapping("/creators")
+    public String getSearchCreatorPage(@RequestParam String name, Model model) {
+        var userId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        var nameForsearh = "%" + name + "%";
+        model.addAttribute("findCreators", creatorService.findCreatorsByNameByUserId(nameForsearh, userId));
+        return "search/creators";
+    }
+
+    @PostMapping("/creator/addSubscription/{id}")
+    public String addCreatorToSubscriptions(@PathVariable Long id) {
+        var username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        userDetailsService.addCreatorToUserSubscriptionsById(id, username);
         return "redirect:/search";
     }
 }

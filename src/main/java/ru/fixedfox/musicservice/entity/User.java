@@ -47,7 +47,7 @@ public class User implements UserDetails {
     @ManyToMany
     @JoinTable(name = "subscriptions",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "creators_id"))
+            inverseJoinColumns = @JoinColumn(name = "creator_id"))
     private Set<Creator> subscribtions = new LinkedHashSet<>();
 
     @Column(name = "telegram_nickname")
@@ -78,6 +78,14 @@ public class User implements UserDetails {
 
     public void setSubscribtions(Set<Creator> subscribtions) {
         this.subscribtions = subscribtions;
+    }
+
+    public void addSubscription(Creator creator) {
+        subscribtions.add(creator);
+    }
+
+    public void removeSubscription(Creator creator) {
+        subscribtions.remove(creator);
     }
 
     public Set<Track> getLibrarytracks() {
@@ -115,7 +123,6 @@ public class User implements UserDetails {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -123,11 +130,10 @@ public class User implements UserDetails {
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
     }
+
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);
     }
-
-
 
     public Long getId() {
         return id;
@@ -143,7 +149,7 @@ public class User implements UserDetails {
     }
 
     public boolean isAuthorityName(String authority) {
-        return authorities.stream().map(i -> i.getAuthority()).anyMatch(i -> i.equals(authority));
+        return authorities.stream().map(Authority::getAuthority).anyMatch(i -> i.equals(authority));
     }
 
     public void setPassword(String password) {
