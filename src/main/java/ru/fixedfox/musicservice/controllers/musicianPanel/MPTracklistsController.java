@@ -1,5 +1,6 @@
 package ru.fixedfox.musicservice.controllers.musicianPanel;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,26 +16,21 @@ import ru.fixedfox.musicservice.services.*;
 @RequestMapping("/musician_panel/tracklists")
 public class MPTracklistsController {
 
-    private final TracklistService tracklistService;
-    private final GenreService genreService;
-    private final TracklistTypeService tracklistTypeService;
-    private final CreatorService creatorService;
-    private final TrackService trackService;
-    private final UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    private TracklistService tracklistService;
+    @Autowired
+    private GenreService genreService;
+    @Autowired
+    private TracklistTypeService tracklistTypeService;
+    @Autowired
+    private CreatorService creatorService;
+    @Autowired
+    private TrackService trackService;
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    private TelegramIntegrationService telegramIntegrationService;
 
-    public MPTracklistsController(TracklistService tracklistService,
-                                  GenreService genreService,
-                                  TracklistTypeService tracklistTypeService,
-                                  CreatorService creatorService,
-                                  TrackService trackService,
-                                  UserDetailsServiceImpl userDetailsService) {
-        this.tracklistService = tracklistService;
-        this.genreService = genreService;
-        this.tracklistTypeService = tracklistTypeService;
-        this.creatorService = creatorService;
-        this.trackService = trackService;
-        this.userDetailsService = userDetailsService;
-    }
 
     @GetMapping
     public String getAllTracklistsPage(Model model) {
@@ -44,7 +40,7 @@ public class MPTracklistsController {
 
     @GetMapping("/{id}")
     public String getTraclistPageById(@PathVariable Long id, Model model) {
-        model.addAttribute("tracklist",tracklistService.findTracklistById(id));
+        model.addAttribute("tracklist", tracklistService.findTracklistById(id));
         String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         model.addAttribute("userCreators", userDetailsService.loadNameWithCreatorsByUsername(username));
         model.addAttribute("userTracks", userDetailsService.loadNameWithTracksByUsername(username));
@@ -55,7 +51,7 @@ public class MPTracklistsController {
     public String editTracklistNameById(@PathVariable Long id, @ModelAttribute EditItemNameDto tracklist) {
         tracklist.setItemId(id);
         tracklistService.editTracklistNameById(tracklist);
-        return String.format("redirect:/musician_panel/tracklists/%d",id);
+        return String.format("redirect:/musician_panel/tracklists/%d", id);
     }
 
     @GetMapping("/addNewTracklist")
@@ -64,11 +60,13 @@ public class MPTracklistsController {
         model.addAttribute("genres", genreService.getAllGenres());
         return "musician_panel/tracklists/addNewTracklist";
     }
+
     @PostMapping("/addNewTracklist")
     public String addNewTracklist(@ModelAttribute NewTracklistDto tracklist) {
         tracklistService.addNewTracklist(tracklist);
         return "redirect:/musician_panel/tracklists";
     }
+
     @PostMapping("/delete/{tracklistId}")
     public String addNewTracklist(@PathVariable Long tracklistId) {
         var tracklist = tracklistService.findTracklistById(tracklistId);
@@ -82,16 +80,16 @@ public class MPTracklistsController {
         tracklist.setTracklistId(tracklistId);
         tracklist.setTrack(trackService.findTrackById(tracklist.getTrackId()));
         tracklistService.addTrackToTracklist(tracklist);
-        return String.format("redirect:/musician_panel/tracklists/%d",tracklistId);
+        return String.format("redirect:/musician_panel/tracklists/%d", tracklistId);
     }
 
     @PostMapping("/delTrack/{tracklistId}")
     public String deleteTrackFromTracklistId(@PathVariable Long tracklistId,
-                                        @ModelAttribute EditTrackInTracklistDto tracklist) {
+                                             @ModelAttribute EditTrackInTracklistDto tracklist) {
         tracklist.setTracklistId(tracklistId);
         tracklist.setTrack(trackService.findTrackById(tracklist.getTrackId()));
         tracklistService.deleteTrackFromTracklist(tracklist);
-        return String.format("redirect:/musician_panel/tracklists/%d",tracklistId);
+        return String.format("redirect:/musician_panel/tracklists/%d", tracklistId);
     }
 
     @PostMapping("/addCreator/{tracklistId}")
@@ -100,21 +98,26 @@ public class MPTracklistsController {
         tracklist.setItemId(tracklistId);
         tracklist.setCreator(creatorService.getCreatorById(tracklist.getCreatorId()));
         tracklistService.addCreatorToTracklist(tracklist);
-        return String.format("redirect:/musician_panel/tracklists/%d",tracklistId);
+        return String.format("redirect:/musician_panel/tracklists/%d", tracklistId);
     }
 
     @PostMapping("/delCreator/{tracklistId}")
     public String deleteCreatorFromTracklistId(@PathVariable Long tracklistId,
-                                          @ModelAttribute EditCreatorInItemDto tracklist) {
+                                               @ModelAttribute EditCreatorInItemDto tracklist) {
         tracklist.setItemId(tracklistId);
         tracklist.setCreator(creatorService.getCreatorById(tracklist.getCreatorId()));
         tracklistService.deleteCreatorFromTracklist(tracklist);
-        return String.format("redirect:/musician_panel/tracklists/%d",tracklistId);
+        return String.format("redirect:/musician_panel/tracklists/%d", tracklistId);
     }
 
     @PostMapping("/setPublish/{tracklistId}")
     public String setPublishByTracklistId(@PathVariable Long tracklistId, @RequestParam Boolean publish) {
         tracklistService.setPublishTracklistById(tracklistId, publish);
-        return String.format("redirect:/musician_panel/tracklists/%d",tracklistId);
+        if (publish) {
+            var tracklist = tracklistService.getInformationAboutTracklistForNotify(tracklistId);
+            var usersForSend = userDetailsService.findUserBySubscriptionByTracklist(tracklistId);
+            telegramIntegrationService.NotificationNewTracklistPublished(usersForSend, tracklist);
+        }
+        return String.format("redirect:/musician_panel/tracklists/%d", tracklistId);
     }
 }

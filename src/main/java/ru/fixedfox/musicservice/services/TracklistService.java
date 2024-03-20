@@ -2,10 +2,8 @@ package ru.fixedfox.musicservice.services;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.fixedfox.musicservice.dto.EditCreatorInItemDto;
-import ru.fixedfox.musicservice.dto.EditItemNameDto;
-import ru.fixedfox.musicservice.dto.EditTrackInTracklistDto;
-import ru.fixedfox.musicservice.dto.NewTracklistDto;
+import ru.fixedfox.musicservice.dto.*;
+import ru.fixedfox.musicservice.entity.Creator;
 import ru.fixedfox.musicservice.entity.Tracklist;
 import ru.fixedfox.musicservice.repository.TracklistRepository;
 
@@ -13,6 +11,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class TracklistService {
@@ -97,5 +96,16 @@ public class TracklistService {
                 () -> new UsernameNotFoundException(String.format("Tracklist with id = '%s'", tracklistId)));
         tracklistFromBase.setPublished(publish);
         tracklistRepository.save(tracklistFromBase);
+    }
+
+    public TracklistInfoDto getInformationAboutTracklistForNotify(Long tracklistId) {
+        var tracklist = new TracklistInfoDto();
+        var tracklistFromBase = tracklistRepository.findById(tracklistId).orElseThrow(
+                () -> new UsernameNotFoundException(String.format("Tracklist with id = '%s'", tracklistId)));
+        tracklist.setTracklistName(tracklistFromBase.getName());
+        tracklist.setTracklistGenre(tracklistFromBase.getGenre().getGenreName());
+        tracklist.setTracklistCreators(tracklistFromBase.getCreators().stream().map(Creator::getCreatorName).collect(Collectors.toSet()));
+        tracklist.setTracklistType(tracklistFromBase.getTracklistType().getTracklistTypeName());
+        return tracklist;
     }
 }

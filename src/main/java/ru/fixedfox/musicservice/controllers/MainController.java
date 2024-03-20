@@ -35,11 +35,6 @@ public class MainController {
         return "mainpage";
     }
 
-    @GetMapping("/recommendation")
-    public String getRecomendationPage() {
-        return "recommendation";
-    }
-
     @GetMapping("/subscriptions")
     public String getSubscriptionPage(Model model) {
         String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
@@ -47,7 +42,7 @@ public class MainController {
         return "subscriptions";
     }
 
-    @PostMapping("/subscriptions/remove/{creatorId}")
+    @PostMapping("/subscription/remove/{creatorId}")
     public String removeCreatorFromUserSubscriptions(@PathVariable Long creatorId) {
         String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         userDetailsServiceImpl.removeCreatorFromUserSubscriptionsById(creatorId, username);

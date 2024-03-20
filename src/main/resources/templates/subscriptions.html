@@ -15,7 +15,7 @@
         <img th:src="@{/imgs/creator.svg}">
         <span class="creatoritemtext"
               th:text="${creator.getCreatorName()}"></span>
-        <form method="POST" th:action="@{'/subscribtions/delete/'+${creator.getId()}}">
+        <form method="POST" th:action="@{'/subscription/remove/'+${creator.getId()}}">
             <button type="submit">Del!</button>
         </form>
     </div>

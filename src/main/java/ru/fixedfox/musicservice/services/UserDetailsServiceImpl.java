@@ -64,8 +64,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 userDto.setTelegramConnect(true);
             }
         }
-;
-        ;
         return userDto;
     }
 
@@ -171,7 +169,22 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public void addTelegramName(String currentUser, String telegramName) {
         var userFromBase = userRepository.findByUsername(currentUser).orElseThrow(() -> new UsernameNotFoundException(
                 String.format("User '%s' not found", currentUser)));
-        userFromBase.setTelegramNickname(telegramName);
-        userRepository.save(userFromBase);
+        if (!telegramName.toLowerCase().equals(userFromBase.getTelegramNickname())) {
+            userFromBase.setTelegramNickname(telegramName.toLowerCase());
+            userFromBase.setTelegram_id(null);
+            userRepository.save(userFromBase);
+        }
     }
-}
+    @Transactional
+    public void setTelegramIdToUsers(UserWithTelgramId user) {
+            var userFromBase = userRepository.findByTelegramNickname(
+                    user.getTelegramName()).orElseThrow(() -> new UsernameNotFoundException(
+                    String.format("User with TelegramName: '%s' not found", user.getTelegramName())));
+            userFromBase.setTelegram_id(user.getTelegramId());
+            userRepository.save(userFromBase);
+        }
+
+        public Set<User> findUserBySubscriptionByTracklist(Long tracklistId) {
+        return userRepository.findUserBySubscriptionByTracklist(tracklistId);
+        }
+    }

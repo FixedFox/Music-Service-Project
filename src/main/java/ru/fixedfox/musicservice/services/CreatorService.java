@@ -31,7 +31,6 @@ public class CreatorService {
     public Set<Creator> findCreatorsByNameByUserId(String creatorName, Long userId) {
         return creatorRepository.findByCreatorNameByUserId(creatorName, userId);
     }
-
     public Creator findCreatorById(Long creatorId) {
         return creatorRepository.getReferenceById((creatorId));
     }
