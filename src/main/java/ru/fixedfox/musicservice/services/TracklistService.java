@@ -108,4 +108,8 @@ public class TracklistService {
         tracklist.setTracklistType(tracklistFromBase.getTracklistType().getTracklistTypeName());
         return tracklist;
     }
+
+    public Set<Tracklist> findTrackslsitsByUserIdByCreatorId(Long creatorId, Long userId) {
+        return tracklistRepository.findTrackslsitsByUserIdByCreatorId(creatorId, userId);
+    }
 }

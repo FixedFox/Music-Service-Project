@@ -16,9 +16,7 @@
     <div class="itemContainer">
         <div class="creatoritem" th:each="creator :${creators}">
             <img th:src="@{/imgs/creator.svg}">
-            <span class="creatoritemtext"
-                  th:text="${creator.getCreatorName()}"></span>
-            </form>
+            <a class="creatoritemtext" th:href="@{'/my_collection/creators/'+${creator.getId()}}">[[${creator.getCreatorName()}]]</a>
         </div>
     </div>
 </div>

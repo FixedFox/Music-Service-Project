@@ -67,4 +67,12 @@ public class CollectionController {
         model.addAttribute("creators",creatorService.findCreatorByLibraryUserId(userId));
         return "my_collection/creators";
     }
+
+    @GetMapping("/creators/{creatorId}")
+    public String getMyCollectionAlbumsByCreatorId(@PathVariable Long creatorId, Model model) {
+        Long userId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        model.addAttribute("creator", creatorService.getCreatorById(creatorId));
+        model.addAttribute("tracklists", tracklistService.findTrackslsitsByUserIdByCreatorId(creatorId, userId));
+        return "my_collection/creators/creator";
+    }
 }
