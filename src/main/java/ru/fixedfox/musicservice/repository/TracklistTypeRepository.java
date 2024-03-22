@@ -5,5 +5,5 @@ import ru.fixedfox.musicservice.entity.TracklistType;
 
 public interface TracklistTypeRepository extends JpaRepository<TracklistType, Integer> {
 
-    public TracklistType getTracklistTypeByTracklistTypeName(String name);
+    TracklistType getTracklistTypeByTracklistTypeName(String name);
 }

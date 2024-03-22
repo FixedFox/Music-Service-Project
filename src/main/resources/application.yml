@@ -4,8 +4,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/music-service
     username: postgres
     password: 1
-  jpa:
-    show-sql: true
 server:
   error:
     include-message: always

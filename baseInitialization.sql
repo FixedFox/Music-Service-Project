@@ -88,5 +88,3 @@ CREATE TABLE subscriptions (
     creator_id INTEGER REFERENCES creators(id),
     PRIMARY KEY (user_id, creator_id)
 );
-
-

@@ -9,8 +9,6 @@ import java.util.Set;
 
 public interface CreatorRepository extends JpaRepository<Creator, Long> {
 
-    Set<Creator> findByUser_Id(Long userId);
-
     @Query(nativeQuery = true, value = "SELECT id, creator_name, user_id FROM creators " +
             "WHERE user_id = :userId AND id NOT IN " +
             "(SELECT t1.id FROM creators t1 " +
