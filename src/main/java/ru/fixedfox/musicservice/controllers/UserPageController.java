@@ -1,13 +1,11 @@
 package ru.fixedfox.musicservice.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import ru.fixedfox.musicservice.dto.EditNameOfUserDto;
 import ru.fixedfox.musicservice.dto.EditPasswordDto;
 import ru.fixedfox.musicservice.dto.NewCreatorDto;
@@ -15,8 +13,6 @@ import ru.fixedfox.musicservice.entity.User;
 import ru.fixedfox.musicservice.services.CreatorService;
 import ru.fixedfox.musicservice.services.TelegramIntegrationService;
 import ru.fixedfox.musicservice.services.UserDetailsServiceImpl;
-
-import java.util.NoSuchElementException;
 
 @Controller
 @RequestMapping("/user_page")
@@ -86,11 +82,11 @@ public class UserPageController {
 
     @PostMapping("/addTelegram")
     public String addTelegramAccount(@RequestParam String telegramName) {
-        var currentUser = ((User) SecurityContextHolder
+        var currentUsername = ((User) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getPrincipal()).getUsername();
-        userDetailsServiceImpl.addTelegramName(currentUser, telegramName);
+        userDetailsServiceImpl.addTelegramName(currentUsername, telegramName);
         return "redirect:/user_page";
     }
 
@@ -100,10 +96,15 @@ public class UserPageController {
                 .getContext()
                 .getAuthentication()
                 .getPrincipal());
-        var userFromBase =userDetailsServiceImpl.findUserByUsername(currentUser.getUsername());
-        var userTelegramIdLogin = telegramService.takeChatIdByTelegramName(userFromBase.getTelegramNickname());
-        if (userTelegramIdLogin != null) {
-            userDetailsServiceImpl.setTelegramIdToUsers(userTelegramIdLogin);
+        var userFromBase = userDetailsServiceImpl.findUserByUsername(currentUser.getUsername());
+        Long telgramId = null;
+        if (userFromBase.isTelegramNicknameExist()) {
+            telgramId = telegramService.findTelegramIdByTelegramName(userFromBase.getTelegramNickname());
+            userDetailsServiceImpl.setTelegramIdToUser(
+                    userFromBase.getTelegramNickname(), telgramId);
+        }
+        if (telgramId != null) {
+            telegramService.sendHelloByTelegramId(userFromBase.getName(),telgramId);
         }
         return "redirect:/user_page";
     }

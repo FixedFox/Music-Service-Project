@@ -8,10 +8,14 @@
 <body>
 <div class="container">
     <h1>Альбомы</h1>
-    <menu>
-        <a class="backButton" href="/musician_panel"><img src="/imgs/backButton.svg"></a>
-        <a href="/musician_panel/tracklists/addNewTracklist">Добавить новую коллекцию композиций</a>
-    </menu>
+    <div class="menuitemcontainer">
+        <div class="menuitem">
+            <a class="backButton" href="/musician_panel"><img src="/imgs/backButton.svg"></a>
+        </div>
+        <div class="menuitem">
+            <a href="/musician_panel/tracklists/addNewTracklist">Добавить новую коллекцию композиций</a>
+        </div>
+    </div>
     <div class="itemContainer">
         <div class="tracklistitem" th:each="tracklist :${tracklists}">
             <img th:src="@{/imgs/list.svg}">
@@ -21,7 +25,7 @@
             <span> - </span>
             <span th:text="${tracklist.getGenre().getGenreName()}"></span>
             <form method="POST" th:action="'/musician_panel/tracklists/delete/'+${tracklist.getId()}">
-                <button type="submit">Del!</button>
+                <button style="border-radius:32px" type="submit"><img src="/imgs/trashbin.svg"></button>
             </form>
         </div>
     </div>

@@ -35,8 +35,11 @@ public class CreatorService {
         return creatorRepository.getReferenceById((creatorId));
     }
 
-    public Set<Creator> findCreatorsByUserId(Long userId) {
-        return creatorRepository.findByUser_Id(userId);
+    public Set<Creator> findCreatorsByUserIdIsNotInTrackById(Long trackId, Long userId) {
+        return creatorRepository.findCreatorsByUserIdIsNotInTrackById(trackId ,userId);
+    }
+    public Set<Creator> findCreatorsByUserIdIsNotInTracklistById(Long tracklistId, Long userId) {
+        return creatorRepository.findCreatorsByUserIdIsNotInTracklistById(tracklistId ,userId);
     }
 
     public Set<Creator> findCreatorByLibraryUserId(Long userId) {

@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <title>Hello</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/style/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
-    <h1>Добро пожаловать!</h1><br>
-        <a href="/sign_in">Войти</a>
-        <a href="/sign_up">Зарегистрироваться</a>
+    <h1>Добро пожаловать!</h1>
+    <div class="menuitemcontainer">
+        <div class="menuitem">
+            <a href="/sign_in">Войти</a>
+        </div>
+        <div class="menuitem">
+            <a href="/sign_up">Зарегистрироваться</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>

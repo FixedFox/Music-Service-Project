@@ -35,6 +35,11 @@ public class TrackService {
         trackFromBase.addCreator(track.getCreator());
         trackRepository.save(trackFromBase);
     }
+    public void removeCreatorFromTrack(EditCreatorInItemDto track) {
+        var trackFromBase = findTrackById(track.getItemId());
+        trackFromBase.removeCreator(track.getCreator());
+        trackRepository.save(trackFromBase);
+    }
 
     @Transactional
     public void deleteTrack(Track track) {
@@ -50,5 +55,9 @@ public class TrackService {
 
     public Set<Track> findTracksTracklistsCreatorsByName(String name, Long userId) {
        return trackRepository.findAllByTrackTracklistCreatorNameWithUserId(name, userId);
+    }
+
+    public Set<Track> findTracksByUserIdIsNotInTracklistById(Long tracklistId, Long userId) {
+        return trackRepository.findTracksByUserIdIsNotInTracklistById(tracklistId, userId);
     }
 }

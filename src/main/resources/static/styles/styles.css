@@ -1,18 +1,12 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: -apple-system;
 }
 body {
     background-image: linear-gradient(-45deg, #35C3F3 0%, #8b9fe8 20%, #e681d8 39%, #ffa9a4 76%, #FED2CE 100%);
     width: auto;
     height: auto;
-}
-
-menu {
-    height: 56px;
-    width: auto;
 }
 
 .container {
@@ -22,7 +16,6 @@ menu {
     height: 80vh;
     margin: 10vh auto;
     padding: 20px;
-    text-align: center;
     border-radius: 20px;
     background-color: #ffffff7d;
     background-blend-mode: overlay;
@@ -30,16 +23,38 @@ menu {
     -webkit-backdrop-filter: blur(33px);
 }
 
-a {
-    text-decoration: none;
-    display: inline-block;
-    background-color: #007AFF;
-    padding: 10px 10px;
-    height: 40px;
-    border-radius: 12px;
-    color: white;
-    margin: 8px;
+.menuitemcontainer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: auto;
+    height: 70px;
 }
+.menuitem {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    margin: 10px;
+    text-align: center;
+    background-color: #F2F2F7;
+    border-radius: 12px;
+    padding: 0 20px ;
+}
+
+.login_container {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-content: start;
+}
+
+.login_box {
+    display: flex;
+    justify-content: left;
+    align-content: start;
+}
+
 
 h1 {
     text-align: center;
@@ -58,15 +73,15 @@ h3 {
 
 .genreitem {
     display: flex;
+    direction: ltr;
     justify-content: flex-start;
     align-items: center;
     background-color: white;
     height: 60px;
-    width: 400px;
+    width: 120px;
     border-radius: 10px;
     padding: 10px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin: 10px;
 
 }
 .trackitem {
@@ -74,7 +89,7 @@ h3 {
     justify-content: flex-start;
     align-items: center;
     background-color: white;
-    height: 60px;
+    height: 40px;
     width: 360px;
     border-radius: 10px;
     padding: 10px;
@@ -88,12 +103,11 @@ h3 {
     justify-content: flex-start;
     align-items: center;
     background-color: white;
-    height: 60px;
-    width: 400px;
+    height: 50px;
+    width: 350px;
     border-radius: 10px;
     padding: 10px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin: 10px;
 }
 .creatoritem {
     display: flex;
@@ -101,7 +115,7 @@ h3 {
     align-items: center;
     background-color: white;
     height: 60px;
-    width: 272px;
+    width: 256px;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
@@ -147,6 +161,7 @@ h3 {
 
 .telegramEditField {
     display: flex;
+    direction: ltr;
     align-items: center;
     text-align: left;
     background-color: white;
@@ -156,8 +171,4 @@ h3 {
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 8px;
-}
-
-.backButton {
-    background-color: transparent;
 }

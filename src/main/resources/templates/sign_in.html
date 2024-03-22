@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <title>Страница входа</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/style/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
     <h1>Страница входа</h1>
-    <form method="POST" action="/sign_in">
-        <input type="text" name="username">
-        <input type="password" name="password">
-        <button type="submit">Войти</button>
-    </form>
-    <a href="/sign_up">Ещё не зарегистрированы?</a>
+    <div class="menuitemcontainer">
+        <div class="menuitem">
+            <a href="/sign_up">Ещё не зарегистрированы?</a>
+        </div>
+    </div>
+    <div class="login_container">
+        <div class="login_box">
+            <form method="POST" action="/sign_in">
+                <label>Имя пользователя</label><br>
+                <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="login"><br>
+                <label>Пароль</label><br>
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="password"><br>
+                <button type="submit" class="btn btn-primary">Войти</button><br>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>

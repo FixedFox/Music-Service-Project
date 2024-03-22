@@ -8,15 +8,26 @@
 <body>
 <div class="container">
     <h1>Привет, [[${user.getName()}]]</h1>
-    <menu>
-        <a style="background-color: #FF2D55" href="/logout"><img src="imgs/exit.svg"></a>
-        <a href="/user_page">Пользователь</a>
-        <a href="/my_collection">Библиотека</a>
-        <a href="/subscriptions">Подписки</a>
-        <a href="/search">Поиск</a>
-        <a href="/musician_panel"
-           th:if="${user.isAuthority('MUSICIAN')}">Панель музыканта</a>
-    </menu>
+    <div class="menuitemcontainer">
+        <div style="background-color: #FF2D55" class="menuitem">
+            <a href="/logout"><img src="imgs/exit.svg"></a>
+        </div>
+        <div class="menuitem">
+            <a href="/user_page">Пользователь</a>
+        </div>
+        <div class="menuitem">
+            <a href="/my_collection">Библиотека</a>
+        </div>
+        <div class="menuitem">
+            <a href="/search">Поиск</a>
+        </div>
+        <div class="menuitem">
+            <a href="/subscriptions">Подписки</a>
+        </div>
+        <div th:if="${user.isAuthority('MUSICIAN')}" class="menuitem">
+            <a href="/musician_panel">Панель музыканта</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>

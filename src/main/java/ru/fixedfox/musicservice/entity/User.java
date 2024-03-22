@@ -72,6 +72,10 @@ public class User implements UserDetails {
         this.telegramNickname = telegramNickname;
     }
 
+    public boolean isTelegramNicknameExist() {
+        return telegramNickname != null;
+    }
+
     public Set<Creator> getSubscribtions() {
         return subscribtions;
     }

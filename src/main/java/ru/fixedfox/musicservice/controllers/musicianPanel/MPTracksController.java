@@ -40,7 +40,7 @@ public class MPTracksController {
     public String getTrackByIdPage(@PathVariable Long trackId, Model model) {
         model.addAttribute("track", trackService.findTrackById(trackId));
         var userId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        model.addAttribute("creators", creatorService.findCreatorsByUserId(userId));
+        model.addAttribute("creators", creatorService.findCreatorsByUserIdIsNotInTrackById(trackId, userId));
         return "musician_panel/tracks/track";
     }
 
@@ -57,6 +57,13 @@ public class MPTracksController {
         track.setItemId(trackId);
         track.setCreator(creatorService.getCreatorById(track.getCreatorId()));
         trackService.addCreatorToTrack(track);
+        return String.format("redirect:/musician_panel/tracks/%d", trackId);
+    }
+    @PostMapping("/removeCreator/{trackId}")
+    public String removeCreatorToTrackById(@PathVariable Long trackId, @ModelAttribute EditCreatorInItemDto track) {
+        track.setItemId(trackId);
+        track.setCreator(creatorService.getCreatorById(track.getCreatorId()));
+        trackService.removeCreatorFromTrack(track);
         return String.format("redirect:/musician_panel/tracks/%d", trackId);
     }
 

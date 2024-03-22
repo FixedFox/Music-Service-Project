@@ -8,16 +8,20 @@
 <body>
 <div class="container">
     <h1>Все композиции:</h1>
-    <menu>
-        <a class="backButton" href="/my_collection"><img src="/imgs/backButton.svg"></a>
-    </menu>
-    <div class="trackitem" th:each="track :${tracks.getTracks()}">
-        <img th:src="@{/imgs/note.svg}">
-        <span class="creatoritemtext"
-              th:text="${track.getTrackName()} + ' - ' + ${track.getGenre().getGenreName()}"></span>
-        <form method="POST" th:action="@{'/my_collection/tracks/delete/'+${track.getTrackId()}}">
-            <button type="submit">Del!</button>
-        </form>
+    <div class="menuitemcontainer">
+        <div class="menuitem" style="justify-content: left">
+            <a class="backButton" href="/my_collection"><img src="/imgs/backButton.svg"></a>
+        </div>
+    </div>
+    <div class="itemContainer">
+        <div class="trackitem" th:each="track :${tracks.getTracks()}">
+            <img th:src="@{/imgs/note.svg}">
+            <span class="creatoritemtext"
+                  th:text="${track.getTrackName()} + ' - ' + ${track.getGenre().getGenreName()}"></span>
+            <form method="POST" th:action="@{'/my_collection/tracks/delete/'+${track.getTrackId()}}">
+                <button style="border-radius:32px" type="submit"><img src="/imgs/trashbin.svg"></button>
+            </form>
+        </div>
     </div>
 </div>
 </body>

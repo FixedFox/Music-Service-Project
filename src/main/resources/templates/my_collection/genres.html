@@ -8,13 +8,17 @@
 <body>
 <div class="container">
     <h1>Все Жанры</h1>
-    <menu>
-        <a class="backButton" href="/my_collection"><img src="/imgs/backButton.svg"></a>
-    </menu>
-    <div class="trackitem" th:each="genre :${genres}">
-        <img th:src="@{/imgs/note.svg}">
-        <span class="creatoritemtext"
-              th:text="${genre.getGenreName()}"></span>
+    <div class="menuitemcontainer">
+        <div class="menuitemcontainer">
+            <a class="backButton" href="/my_collection"><img src="/imgs/backButton.svg"></a>
+        </div>
+    </div>
+    <div class="itemContainer">
+        <div class="trackitem" th:each="genre :${genres}">
+            <img th:src="@{/imgs/note.svg}">
+            <span class="creatoritemtext"
+                  th:text="${genre.getGenreName()}"></span>
+        </div>
     </div>
 </div>
 </body>

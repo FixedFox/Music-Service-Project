@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.fixedfox.musicservice.dto.*;
 import ru.fixedfox.musicservice.entity.Creator;
+import ru.fixedfox.musicservice.entity.Track;
 import ru.fixedfox.musicservice.entity.User;
 import ru.fixedfox.musicservice.repository.AuthorityRepository;
 import ru.fixedfox.musicservice.repository.UserRepository;
@@ -167,24 +168,28 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Transactional
     public void addTelegramName(String currentUser, String telegramName) {
-        var userFromBase = userRepository.findByUsername(currentUser).orElseThrow(() -> new UsernameNotFoundException(
+        if ("<empty>".equals(telegramName)) {
+            telegramName = null;
+        }
+        User userFromBase = userRepository.findByUsername(currentUser).orElseThrow(() -> new UsernameNotFoundException(
                 String.format("User '%s' not found", currentUser)));
-        if (!telegramName.toLowerCase().equals(userFromBase.getTelegramNickname())) {
-            userFromBase.setTelegramNickname(telegramName.toLowerCase());
+        if ((userFromBase.getTelegramNickname() != null) &&
+                !userFromBase.getTelegramNickname().equals(telegramName)) {
+            userFromBase.setTelegramNickname(telegramName);
             userFromBase.setTelegram_id(null);
             userRepository.save(userFromBase);
         }
     }
-    @Transactional
-    public void setTelegramIdToUsers(UserWithTelgramId user) {
-            var userFromBase = userRepository.findByTelegramNickname(
-                    user.getTelegramName()).orElseThrow(() -> new UsernameNotFoundException(
-                    String.format("User with TelegramName: '%s' not found", user.getTelegramName())));
-            userFromBase.setTelegram_id(user.getTelegramId());
-            userRepository.save(userFromBase);
-        }
 
-        public Set<User> findUserBySubscriptionByTracklist(Long tracklistId) {
-        return userRepository.findUserBySubscriptionByTracklist(tracklistId);
-        }
+    @Transactional
+    public void setTelegramIdToUser(String telegramName, Long telegramId) {
+        var userFromBase = userRepository.findByTelegramNickname(telegramName).orElseThrow(
+                () -> new UsernameNotFoundException(String.format("User with @'%s' not found", telegramName)));
+        userFromBase.setTelegram_id(telegramId);
+        userRepository.save(userFromBase);
     }
+
+    public Set<User> findUserBySubscriptionByTracklist(Long tracklistId) {
+        return userRepository.findUserBySubscriptionByTracklist(tracklistId);
+    }
+}

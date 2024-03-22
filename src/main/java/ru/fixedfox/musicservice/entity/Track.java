@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tracks")
-public class Track {
+public class Track implements Comparable<Track> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,6 +82,9 @@ public class Track {
     public void addCreator(Creator creator) {
         creators.add(creator);
     }
+    public void removeCreator(Creator creator) {
+        creators.remove(creator);
+    }
     public Track() {
     }
 
@@ -136,5 +139,11 @@ public class Track {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+
+    @Override
+    public int compareTo(Track o) {
+        return this.trackName.compareTo(o.trackName);
     }
 }

@@ -34,7 +34,7 @@ public class CollectionTracks {
         trackInLibrary.setTrackId(trackId);
         trackInLibrary.setUsername(username);
         userDetailsServiceImpl.deleteTrackFromMyLibraryById(trackInLibrary);
-        return "my_collection/tracks";
+        return "redirect:/my_collection/tracks";
     }
 
 }

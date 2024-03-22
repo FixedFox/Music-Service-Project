@@ -8,16 +8,20 @@
 <body>
 <div class="container">
     <h1>Все авторы:</h1>
-    <menu>
-        <a class="backButton" href="/mainpage"><img src="/imgs/backButton.svg"></a>
-    </menu>
-    <div class="trackitem" th:each="creator :${creators}">
-        <img th:src="@{/imgs/creator.svg}">
-        <span class="creatoritemtext"
-              th:text="${creator.getCreatorName()}"></span>
-        <form method="POST" th:action="@{'/subscription/remove/'+${creator.getId()}}">
-            <button type="submit">Del!</button>
-        </form>
+    <div class="menuitemcontainer">
+        <div class="menuitem">
+            <a class="backButton" href="/mainpage"><img src="/imgs/backButton.svg"></a>
+        </div>
+    </div>
+    <div class="itemContainer">
+        <div class="creatoritem" th:each="creator :${creators}">
+            <img th:src="@{/imgs/creator.svg}">
+            <span class="creatoritemtext"
+                  th:text="${creator.getCreatorName()}"></span>
+            <form method="POST" th:action="@{'/subscription/remove/'+${creator.getId()}}">
+                <button style="border-radius:32px" type="submit"><img src="/imgs/trashbin.svg"></button>
+            </form>
+        </div>
     </div>
 </div>
 </body>

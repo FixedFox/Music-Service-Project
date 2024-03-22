@@ -8,11 +8,14 @@
 <body>
 <div class="container">
     <h1>Жанры</h1>
-    <menu>
-        <a class="backButton" href="/musician_panel"><img src="/imgs/backButton.svg"></a>
-    </menu>
+    <div class="menuitemcontainer">
+        <div class="menuitem">
+            <a class="backButton" href="/musician_panel"><img src="/imgs/backButton.svg"></a>
+        </div>
+    </div>
     <div class="editonefield">
-        <form method="POST" action="/musicianpanel/genres/add">
+        <form method="POST" action="/musician_panel/genres/add">
+            <label>Новый жанр</label>
             <input type="text" name="genreName">
             <button type="submit">Добавить!</button>
         </form>
@@ -21,8 +24,10 @@
         <div class="genreitem" th:each="genre :${genres}">
             <div>
                 <span th:text="${genre.getGenreName()}"></span>
-                <a style="height: 34px; border-radius: 40px; background-color: #FF3B30"
-                   th:href="@{'genres/delete/' + ${genre.getGenreId()}}">Del!</a>
+                <form method="GET" th:action="'/musician_panel/genres/delete/'+${genre.getGenreId()}">
+                    <button style="border-radius:32px" type="submit"><img src="/imgs/trashbin.svg"></button>
+                </form>
+
             </div>
         </div>
     </div>

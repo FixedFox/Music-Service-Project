@@ -8,12 +8,19 @@
 <body>
 <div class="container">
     <h1>Поиск авторов</h1>
-    <a href="/search">Вернуться назад</a>
-    <div th:each="creator :${findCreators}" class="trackitem">
-        <span>[[${creator.getCreatorName()}]]</span>
-        <form method="POST" th:action="'/search/creator/addSubscription/'+${creator.getId()}">
-            <button type="submit">Подписаться!</button>
-        </form>
+    <div class="menuitemcontainer">
+        <div class="menuitem">
+            <a href="/search">Вернуться назад</a>
+        </div>
+    </div>
+    <div class="itemContainer">
+        <div th:each="creator :${findCreators}" class="trackitem">
+            <img src="/imgs/note.svg">
+            <span>[[${creator.getCreatorName()}]]</span>
+            <form method="POST" th:action="'/search/creator/addSubscription/'+${creator.getId()}">
+                <button type="submit">Подписаться!</button>
+            </form>
+        </div>
     </div>
 </div>
 </body>

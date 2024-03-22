@@ -41,9 +41,11 @@ public class MPTracklistsController {
     @GetMapping("/{id}")
     public String getTraclistPageById(@PathVariable Long id, Model model) {
         model.addAttribute("tracklist", tracklistService.findTracklistById(id));
-        String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-        model.addAttribute("userCreators", userDetailsService.loadNameWithCreatorsByUsername(username));
-        model.addAttribute("userTracks", userDetailsService.loadNameWithTracksByUsername(username));
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("userCreators",
+                creatorService.findCreatorsByUserIdIsNotInTracklistById(id, user.getId()));
+        model.addAttribute("userTracks",
+                trackService.findTracksByUserIdIsNotInTracklistById(id ,user.getId()));
         return "musician_panel/tracklists/tracklist";
     }
 

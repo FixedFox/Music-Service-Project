@@ -8,11 +8,12 @@
 <body>
 <div class="container">
     <h1 th:text="${tracklist.getName()}"></h1>
-    <menu>
-        <a class="backButton" href="/musician_panel/tracklists"><img src="/imgs/backButton.svg"></a>
-    </menu>
-    <span th:text="${tracklist.getTracklistType().getTracklistTypeName()}"></span>
-    <span th:text="${tracklist.getGenre().getGenreName()}"></span>
+    <div class="menuitemcontainer">
+        <div class="menuitem">
+            <a class="backButton" href="/musician_panel/tracklists"><img src="/imgs/backButton.svg"></a>
+        </div>
+    </div>
+    <span>[[${tracklist.getTracklistType().getTracklistTypeName()}]] - [[${tracklist.getGenre().getGenreName()}]]</span>
     <div class="editonefield">
         <form method="POST" th:action="'/musician_panel/tracklists/' + ${tracklist.getId()}">
             <input type="text" name="itemName" th:value="${tracklist.getName()}">
@@ -21,12 +22,20 @@
     </div>
     <div class="editonefield">
         <form method="POST" th:action="'/musician_panel/tracklists/setPublish/' + ${tracklist.getId()}">
-            <button type="submit" th:if="${tracklist.isPublished()}" name="publish" value="false">Распубликовать!</button>
+            <button type="submit" th:if="${tracklist.isPublished()}" name="publish" value="false">Распубликовать!
+            </button>
             <button type="submit" th:if="${!tracklist.isPublished()}" name="publish" value="true">Опубликовать!</button>
         </form>
-
     </div>
     <h3>Авторы:</h3>
+    <form method="POST" th:action="'/musician_panel/tracklists/addCreator/' + ${tracklist.getId()}">
+        <select name="creatorId">
+            <option th:each="creator :${userCreators}" th:value="${creator.getId()}">
+                [[${creator.getCreatorName()}]]
+            </option>
+        </select>
+        <button type="submit">Добавить!</button>
+    </form>
     <div class="creatoritem" th:each="creator :${tracklist.getCreators()}">
         <img th:src="@{/imgs/creator.svg}">
         <span class="creatoritemtext">[[${creator.getCreatorName}]]</span>
@@ -35,15 +44,15 @@
             <button type="submit">Del!</button>
         </form>
     </div>
-    <form method="POST" th:action="'/musician_panel/tracklists/addCreator/' + ${tracklist.getId()}">
-        <select name="creatorId">
-            <option th:each="creator :${userCreators.getCreators()}" th:value="${creator.getId()}">
-                [[${creator.getCreatorName()}]]
+    <h3>Треки:</h3>
+    <form method="POST" th:action="'/musician_panel/tracklists/addTrack/' + ${tracklist.getId()}">
+        <select name="trackId">
+            <option th:each="userTrack :${userTracks}" th:value="${userTrack.getTrackId()}">
+                [[${userTrack.getTrackName()}]]
             </option>
         </select>
         <button type="submit">Добавить!</button>
     </form>
-    <h3>Треки:</h3>
     <div class="itemContainer">
         <div class="trackitem" th:each="track :${tracklist.getTracks()}">
             <img th:src="@{/imgs/note.svg}">
@@ -55,14 +64,6 @@
             </form>
         </div>
     </div>
-    <form method="POST" th:action="'/musician_panel/tracklists/addTrack/' + ${tracklist.getId()}">
-        <select name="trackId">
-            <option th:each="usertrack :${userTracks.getTracks()}" th:value="${usertrack.getTrackId()}">
-                [[${usertrack.getTrackName()}]]
-            </option>
-        </select>
-        <button type="submit">Добавить!</button>
-    </form>
 </div>
 </body>
 </html>

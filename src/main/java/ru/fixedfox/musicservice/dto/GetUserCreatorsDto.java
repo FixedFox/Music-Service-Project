@@ -8,7 +8,7 @@ public class GetUserCreatorsDto {
     private String name;
     private Set<Creator> creators;
     private String telegramName;
-    private Boolean TelegramConnected;
+    private Boolean telegramConnected;
 
     public GetUserCreatorsDto() {
     }
@@ -38,10 +38,10 @@ public class GetUserCreatorsDto {
     }
 
     public Boolean isTelegramConnect() {
-        return TelegramConnected;
+        return telegramConnected;
     }
 
     public void setTelegramConnect(Boolean telegramConnect) {
-        TelegramConnected = telegramConnect;
+        this.telegramConnected = telegramConnect;
     }
 }

@@ -8,19 +8,29 @@
 <body>
 <div class="container">
     <h1>Создать новую коллекцию композиций</h1>
-    <menu>
-        <a class="backButton" href="/musician_panel/tracklists"><img src="/imgs/backButton.svg"></a>
-    </menu>
-    <form method="POST" action="addNewTracklist">
-        <input type="text" name="name"><br>
-        <select name="tracklist_type">
-            <option th:each="tracklist_type :${tracklist_types}" th:value="${tracklist_type.getTracklistTypeName()}">[[${tracklist_type.getTracklistTypeName()}]]</option>
-        </select><br>
-        <select name="genre">
-            <option th:each="genre :${genres}" th:value="${genre.getGenreName()}">[[${genre.getGenreName()}]]</option>
-        </select><br>
-        <button type="submit">Добавить!</button>
-    </form>
+    <div class="menuitemcontainer">
+        <div class="menuitem">
+            <a class="backButton" href="/musician_panel/tracklists"><img src="/imgs/backButton.svg"></a>
+        </div>
+    </div>
+    <div class="login_container">
+        <div class="login_box">
+            <form method="POST" action="addNewTracklist">
+                <input type="text" name="name"><br>
+                <select name="tracklist_type">
+                    <option th:each="tracklist_type :${tracklist_types}"
+                            th:value="${tracklist_type.getTracklistTypeName()}">
+                        [[${tracklist_type.getTracklistTypeName()}]]
+                    </option>
+                </select><br>
+                <select name="genre">
+                    <option th:each="genre :${genres}" th:value="${genre.getGenreName()}">[[${genre.getGenreName()}]]
+                    </option>
+                </select><br>
+                <button type="submit">Добавить!</button>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>

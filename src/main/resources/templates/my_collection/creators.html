@@ -8,14 +8,18 @@
 <body>
 <div class="container">
     <h1>Все авторы:</h1>
-    <menu>
-        <a class="backButton" href="/my_collection"><img src="/imgs/backButton.svg"></a>
-    </menu>
-    <div class="trackitem" th:each="creator :${creators}">
-        <img th:src="@{/imgs/creator.svg}">
-        <span class="creatoritemtext"
-              th:text="${creator.getCreatorName()}"></span>
-        </form>
+    <div class="menuitemcontainer">
+        <div class="menuitem">
+            <a class="backButton" href="/my_collection"><img src="/imgs/backButton.svg"></a>
+        </div>
+    </div>
+    <div class="itemContainer">
+        <div class="creatoritem" th:each="creator :${creators}">
+            <img th:src="@{/imgs/creator.svg}">
+            <span class="creatoritemtext"
+                  th:text="${creator.getCreatorName()}"></span>
+            </form>
+        </div>
     </div>
 </div>
 </body>

@@ -21,6 +21,10 @@
     <div class="creatoritem" th:each="trackCreator :${track.getCreators()}">
         <img th:src="@{/imgs/creator.svg}">
         <span class="creatoritemtext">[[${trackCreator.getCreatorName()}]]</span>
+        <form method="POST" th:action="'/musician_panel/tracks/removeCreator/'+${track.getTrackId()}">
+            <input type="hidden" name="creatorId" th:value="${trackCreator.getId()}">
+            <button type="submit">Del!</button>
+        </form>
     </div>
     <div class="editonefield">
         <form method="post" th:action="'/musician_panel/tracks/addCreator/'+${track.getTrackId()}">

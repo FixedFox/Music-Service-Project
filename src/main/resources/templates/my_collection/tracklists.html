@@ -8,17 +8,21 @@
 <body>
 <div class="container">
     <h1>Все Альбомы:</h1>
-    <menu>
-        <a class="backButton" href="/my_collection"><img src="/imgs/backButton.svg"></a>
-    </menu>
-    <div class="trackitem" th:each="tracklist :${tracklists}">
-        <img th:src="@{/imgs/list.svg}">
-        <span class="creatoritemtext"
-              th:text="${tracklist.getName()} +
+    <div class="menuitemcontainer">
+        <div class="menuitem">
+            <a class="backButton" href="/my_collection"><img src="/imgs/backButton.svg"></a>
+        </div>
+    </div>
+    <div class="itemContainer">
+        <div class="trackitem" th:each="tracklist :${tracklists}">
+            <img th:src="@{/imgs/list.svg}">
+            <span class="creatoritemtext"
+                  th:text="${tracklist.getName()} +
                ' - ' +
                ${tracklist.getTracklistType.getTracklistTypeName()} +
                ' - ' +
                ${tracklist.getGenre().getGenreName()}"></span>
+        </div>
     </div>
 </div>
 </body>

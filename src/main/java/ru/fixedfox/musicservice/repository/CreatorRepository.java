@@ -11,6 +11,20 @@ public interface CreatorRepository extends JpaRepository<Creator, Long> {
 
     Set<Creator> findByUser_Id(Long userId);
 
+    @Query(nativeQuery = true, value = "SELECT id, creator_name, user_id FROM creators " +
+            "WHERE user_id = :userId AND id NOT IN " +
+            "(SELECT t1.id FROM creators t1 " +
+            "JOIN creators_tracks t2 ON t2.creator_id = t1.id " +
+            "WHERE t2.track_id = :trackId )")
+    Set<Creator> findCreatorsByUserIdIsNotInTrackById(Long trackId, Long userId);
+
+    @Query(nativeQuery = true, value = "SELECT id, creator_name, user_id FROM creators " +
+            "WHERE user_id = :userId AND id NOT IN " +
+            "(SELECT t1.id FROM creators t1 " +
+            "JOIN creators_tracklists t2 ON t2.creator_id = t1.id " +
+            "WHERE t2.tracklist_id = :tracklistId )")
+    Set<Creator> findCreatorsByUserIdIsNotInTracklistById(Long tracklistId, Long userId);
+
     Optional<Creator> findById(Long creatorId);
 
     @Query(nativeQuery = true, value = "SELECT * FROM creators t1 " +

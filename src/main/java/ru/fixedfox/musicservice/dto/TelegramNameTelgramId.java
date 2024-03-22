@@ -2,11 +2,11 @@ package ru.fixedfox.musicservice.dto;
 
 import java.util.Objects;
 
-public class UserWithTelgramId {
+public class TelegramNameTelgramId {
     String telegramName;
     Long telegramId;
 
-    public UserWithTelgramId() {
+    public TelegramNameTelgramId() {
     }
 
     public String getTelegramName() {
@@ -29,7 +29,7 @@ public class UserWithTelgramId {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserWithTelgramId user = (UserWithTelgramId) o;
+        TelegramNameTelgramId user = (TelegramNameTelgramId) o;
         return Objects.equals(getTelegramName(), user.getTelegramName()) && Objects.equals(getTelegramId(), user.getTelegramId());
     }
 

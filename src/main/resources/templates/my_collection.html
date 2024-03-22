@@ -8,13 +8,23 @@
 <body>
 <div class="container">
     <h1>[['Коллекция ' + ${user.getName()}]]</h1>
-    <menu>
-        <a class="backButton" href="/mainpage"><img src="/imgs/backButton.svg"></a>
-        <a href="my_collection/tracks">Tracks</a>
-        <a href="my_collection/tracklists">Albums</a>
-        <a href="my_collection/genres">Genres</a>
-        <a href="my_collection/creators">Creators</a>
-    </menu>
+    <div class="menuitemcontainer">
+        <div class="menuitem">
+            <a style="text-decoration: none" href="/mainpage"><img src="/imgs/backButton.svg"></a>
+        </div>
+        <div class="menuitem">
+            <a href="my_collection/tracks">Композиции</a>
+        </div>
+        <div class="menuitem">
+            <a href="my_collection/tracklists">Альбомы</a>
+        </div>
+        <div class="menuitem">
+            <a href="my_collection/genres">Жанры</a>
+        </div>
+        <div class="menuitem">
+            <a href="my_collection/creators">Авторы</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>
