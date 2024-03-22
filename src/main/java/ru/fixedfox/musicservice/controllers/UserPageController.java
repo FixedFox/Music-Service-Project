@@ -21,7 +21,6 @@ public class UserPageController {
     private final UserDetailsServiceImpl userDetailsServiceImpl;
     private final CreatorService creatorService;
     private final PasswordEncoder passwordEncoder;
-
     private final TelegramIntegrationService telegramService;
 
     public UserPageController(UserDetailsServiceImpl userDetailsServiceImpl,

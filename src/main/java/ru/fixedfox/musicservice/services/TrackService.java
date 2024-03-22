@@ -60,4 +60,8 @@ public class TrackService {
     public Set<Track> findTracksByUserIdIsNotInTracklistById(Long tracklistId, Long userId) {
         return trackRepository.findTracksByUserIdIsNotInTracklistById(tracklistId, userId);
     }
+
+    public Set<Track> findTracksByUserIdByAlbumId(Long tracklistId, Long userId) {
+        return trackRepository.findTracksByUserIdByAlbumId(tracklistId, userId);
+    }
 }

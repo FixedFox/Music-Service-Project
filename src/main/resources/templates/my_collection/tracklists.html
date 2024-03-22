@@ -16,12 +16,12 @@
     <div class="itemContainer">
         <div class="trackitem" th:each="tracklist :${tracklists}">
             <img th:src="@{/imgs/list.svg}">
-            <span class="creatoritemtext"
-                  th:text="${tracklist.getName()} +
-               ' - ' +
-               ${tracklist.getTracklistType.getTracklistTypeName()} +
+            <span class="creatoritemtext">
+                  <a th:href="@{'/my_collection/tracklists/'+${tracklist.getId()}}">[[${tracklist.getName()}]]</a>
+               <span th:text="' - ' + ${tracklist.getTracklistType.getTracklistTypeName()} +
                ' - ' +
                ${tracklist.getGenre().getGenreName()}"></span>
+            </span>
         </div>
     </div>
 </div>

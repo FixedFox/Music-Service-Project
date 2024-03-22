@@ -27,4 +27,12 @@ public interface TrackRepository extends JpaRepository<Track, Long> {
             "JOIN tracks_tracklists t2 ON t2.track_id = t1.id\n" +
             "WHERE t2.tracklist_id = :tracklistId)")
     Set<Track> findTracksByUserIdIsNotInTracklistById(Long tracklistId, Long userId);
+
+    @Query(nativeQuery = true, value = "SELECT t1.id, t1.track_name, t1.count_of_plays, t1.is_adult_content, t1.genre_id, t1.user_id FROM tracks t1\n" +
+            "LEFT JOIN librarys t2 ON t2.track_id = t1.id\n" +
+            "WHERE t2.user_id = :userId AND t1.id IN \n" +
+            "(SELECT t3.id FROM tracks t3\n" +
+            "JOIN tracks_tracklists t4 ON t4.track_id = t3.id\n" +
+            "WHERE t4.tracklist_id = :tracklistId )")
+    Set<Track> findTracksByUserIdByAlbumId(Long tracklistId, Long userId);
 }
